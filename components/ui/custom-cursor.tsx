@@ -1,11 +1,24 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 768 && window.matchMedia("(pointer: fine)").matches);
+    };
+
+    checkDesktop();
+    window.addEventListener("resize", checkDesktop);
+    return () => window.removeEventListener("resize", checkDesktop);
+  }, []);
+
+  useEffect(() => {
+    if (!isDesktop) return;
+
     // Inject global styles to hide the default cursor
     const style = document.createElement("style");
     style.innerHTML = `* { cursor: none !important; }`;
@@ -112,7 +125,9 @@ export function CustomCursor() {
       window.removeEventListener("mouseout", onMouseOut);
       cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [isDesktop]);
+
+  if (!isDesktop) return null;
 
   return (
     <div
