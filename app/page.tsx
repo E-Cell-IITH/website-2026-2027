@@ -1,5 +1,7 @@
 import { GLSLHills } from "@/components/ui/glsl-hills";
 import { ManifestoStats } from "@/components/ui/manifesto-stats";
+import { EventsSection } from "@/components/ui/events-section";
+import { PreviousSpeakers } from "@/components/ui/previous-speakers";
 
 export default function Home() {
   return (
@@ -20,6 +22,12 @@ export default function Home() {
 
       {/* Manifesto & Stats Section */}
       <ManifestoStats />
+
+      {/* Events Section */}
+      <EventsSection />
+
+      {/* Previous Speakers Section */}
+      <PreviousSpeakers />
       
     </main>
   );
