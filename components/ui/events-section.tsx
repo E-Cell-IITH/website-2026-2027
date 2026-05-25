@@ -1,50 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
-function ScrambleTitle({ text }: { text: string }) {
-  const [displayText, setDisplayText] = useState(text);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [isScrambling, setIsScrambling] = useState(false);
-
-  useEffect(() => {
-    if (isInView) {
-      setIsScrambling(true);
-      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
-      let iterations = 0;
-      const interval = setInterval(() => {
-        setDisplayText((oldText) =>
-          oldText.split("").map((char, index) => {
-            if (index < iterations) return text[index];
-            if (char === " ") return " ";
-            return chars[Math.floor(Math.random() * chars.length)];
-          }).join("")
-        );
-        iterations += 1 / 3;
-        if (iterations >= text.length) {
-          clearInterval(interval);
-          setIsScrambling(false);
-          setDisplayText(text);
-        }
-      }, 40);
-    }
-  }, [isInView, text]);
-
-  return (
-    <h2
-      ref={ref}
-      className={`text-5xl md:text-7xl tracking-tight transition-all duration-300 ${
-        isScrambling ? "font-mono font-medium text-white/80" : "font-sans font-bold text-white"
-      }`}
-    >
-      {displayText}
-    </h2>
-  );
-}
-
+/*
 function getTagColor(type: string) {
   switch (type.toLowerCase()) {
     case "hackathon":
@@ -57,16 +16,17 @@ function getTagColor(type: string) {
       return "text-zinc-400 bg-zinc-400/10 border-zinc-400/20";
   }
 }
+*/
 
 export function EventsSection() {
   const [hoveredPanelIdx, setHoveredPanelIdx] = useState<number>(0);
 
   const pastEvents = [
-    { title: "Web3 Sandbox", date: "Jan 10, 2026", type: "Hackathon", imageId: "42" },
-    { title: "Design for Devs", date: "Feb 05, 2026", type: "Workshop", imageId: "65" },
-    { title: "Angel Mixer", date: "Mar 20, 2026", type: "Talk", imageId: "123" },
-    { title: "Founder's Retreat", date: "Apr 15, 2026", type: "Workshop", imageId: "24" },
-    { title: "Demo Day", date: "May 25, 2026", type: "Pitch", imageId: "78" }
+    { title: "ESummit", date: "Feb 10, 2026", image: "/Ashish_Arora.jpeg" },
+    { title: "Emerge", date: "Mar 15, 2026", image: "/Emerge 2.0.jpeg" },
+    { title: "Fetching Fortunes", date: "Apr 05, 2026", image: "/FetchingFortunes.jpeg" },
+    { title: "Founders’ Hive", date: "May 12, 2026", image: "/founders_hive.jpg" },
+    // { title: "Startup Fair", date: "Jun 20, 2026", image: "/StartUpFair.jpeg" }
   ];
 
   return (
@@ -97,7 +57,9 @@ export function EventsSection() {
         
         {/* Header */}
         <div className="mb-16">
-          <ScrambleTitle text="Events & Programs" />
+          <h2 className="text-5xl md:text-7xl font-sans font-bold text-white tracking-tight">
+            Events & Programs
+          </h2>
         </div>
 
         {/* Hover Expand Panels */}
@@ -113,7 +75,7 @@ export function EventsSection() {
               >
                 {/* Background Image */}
                 <img 
-                  src={`https://picsum.photos/seed/${event.imageId}/1200/800`} 
+                  src={event.image} 
                   alt={event.title} 
                   className="absolute inset-0 w-full h-full object-cover opacity-80" 
                 />
@@ -141,9 +103,6 @@ export function EventsSection() {
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-sm font-mono text-zinc-300">{event.date}</span>
-                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${getTagColor(event.type)} uppercase tracking-wider`}>
-                      {event.type}
-                    </span>
                   </div>
                   <h3 className="text-4xl md:text-5xl font-bold text-white tracking-tight drop-shadow-md whitespace-nowrap">
                     {event.title}
