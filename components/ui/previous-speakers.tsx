@@ -148,7 +148,7 @@ export function PreviousSpeakers() {
       src: "/speakers/Upasana.jpg",
       alt: "Upasana",
       name: "Upasana Kamineni",
-      role: "VC of the Apollo Foundation and Apollo Life, Founder and MD of URLife",
+      role: "VC of the Apollo Foundation, Founder and MD of URLife",
     },
     {
       src: "/speakers/Anup Gupta.jpeg",

@@ -29,7 +29,7 @@ export function EventsSection() {
   ];
 
   return (
-    <section className="relative w-full bg-[#080808] overflow-hidden py-24">
+    <section id="events" className="relative w-full bg-[#080808] overflow-hidden py-24">
       {/* Required CSS for marquee */}
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes marquee {

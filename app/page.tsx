@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#080808]">
       {/* Hero Section */}
-      <section className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-black">
+      <section id="home" className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-black">
         <GLSLHills />
         <div className="space-y-6 pointer-events-none z-10 text-center absolute">
           <h1 className="font-semibold text-7xl whitespace-pre-wrap text-white">

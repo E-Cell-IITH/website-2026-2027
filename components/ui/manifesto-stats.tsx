@@ -83,7 +83,7 @@ function Stat({ end, suffix = "", label }: StatProps) {
 
 export function ManifestoStats() {
   return (
-    <section className="relative w-full py-16 md:py-20 bg-transparent overflow-hidden">
+    <section id="about" className="relative w-full py-16 md:py-20 bg-transparent overflow-hidden">
       <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
         {/* Part 1: Manifesto */}
         <div className="flex flex-col items-center text-center space-y-6 mb-16">
