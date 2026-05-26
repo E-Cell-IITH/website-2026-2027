@@ -77,9 +77,9 @@ const Carousel_003 = ({
           autoplay={
             autoplay
               ? {
-                  delay: 2500,
-                  disableOnInteraction: true,
-                }
+                delay: 2500,
+                disableOnInteraction: true,
+              }
               : false
           }
           effect="coverflow"
@@ -97,16 +97,16 @@ const Carousel_003 = ({
           pagination={
             showPagination
               ? {
-                  clickable: true,
-                }
+                clickable: true,
+              }
               : false
           }
           navigation={
             showNavigation
               ? {
-                  nextEl: ".swiper-button-next",
-                  prevEl: ".swiper-button-prev",
-                }
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              }
               : false
           }
           className="Carousal_003"
@@ -144,13 +144,48 @@ const Carousel_003 = ({
 
 export function PreviousSpeakers() {
   const speakers = [
-    { src: "https://picsum.photos/seed/spk1/600/800", alt: "Speaker 1", name: "Sam Altman", role: "CEO, OpenAI" },
-    { src: "https://picsum.photos/seed/spk2/600/800", alt: "Speaker 2", name: "Marc Andreessen", role: "Partner, a16z" },
-    { src: "https://picsum.photos/seed/spk3/600/800", alt: "Speaker 3", name: "Brian Chesky", role: "CEO, Airbnb" },
-    { src: "https://picsum.photos/seed/spk4/600/800", alt: "Speaker 4", name: "Mira Murati", role: "CTO, OpenAI" },
-    { src: "https://picsum.photos/seed/spk5/600/800", alt: "Speaker 5", name: "Demis Hassabis", role: "CEO, DeepMind" },
-    { src: "https://picsum.photos/seed/spk6/600/800", alt: "Speaker 6", name: "Jensen Huang", role: "CEO, NVIDIA" },
-    { src: "https://picsum.photos/seed/spk7/600/800", alt: "Speaker 7", name: "Fei-Fei Li", role: "Co-Director, Stanford HAI" },
+    {
+      src: "/speakers/Upasana.jpg",
+      alt: "Upasana",
+      name: "Upasana Kamineni",
+      role: "VC of the Apollo Foundation and Apollo Life, Founder and MD of URLife",
+    },
+    {
+      src: "/speakers/Anup Gupta.jpeg",
+      alt: "Anup Gupta",
+      name: "Anup Gupta",
+      role: "Founder and CEO of MathonGo",
+    },
+    {
+      src: "/speakers/Ashish_Arora.jpeg",
+      alt: "Ashish Arora",
+      name: "Ashish Arora",
+      role: "Founder and Chief Mentor of Physics Galaxy",
+    },
+    {
+      src: "/speakers/Akhil Gupta, Founder, Nobroker.jpg",
+      alt: "Akhil Gupta",
+      name: "Akhil Gupta",
+      role: "Founder, No Broker",
+    },
+    {
+      src: "/speakers/Devvrat Arya - VP of Technology, Pepperfry.jpg",
+      alt: "Devvrat Arya",
+      name: "Devvrat Arya",
+      role: "VP of Technology, Pepperfry",
+    },
+    {
+      src: "/speakers/TN Hari - HR Head, BigBasket.jpg",
+      alt: "TN Hari",
+      name: "TN Hari",
+      role: "HR Head, Big Basket",
+    },
+    {
+      src: "/speakers/Shashank Randev - Founder VC, 100X.VC.jpg",
+      alt: "Shashank Randev",
+      name: "Shashank Randev",
+      role: "Founder VC, 100X.VC",
+    },
   ];
 
   return (
@@ -159,14 +194,14 @@ export function PreviousSpeakers() {
         <h2 className="text-xs font-semibold tracking-[0.2em] text-zinc-500 uppercase mb-4">Insights From</h2>
         <h3 className="text-4xl md:text-5xl font-bold text-white tracking-tight">Previous Speakers</h3>
       </div>
-      
+
       <div className="w-full">
-        <Carousel_003 
-          images={speakers} 
-          showPagination={true} 
-          showNavigation={true} 
-          autoplay={true} 
-          loop={true} 
+        <Carousel_003
+          images={speakers}
+          showPagination={true}
+          showNavigation={true}
+          autoplay={true}
+          loop={true}
         />
       </div>
     </section>

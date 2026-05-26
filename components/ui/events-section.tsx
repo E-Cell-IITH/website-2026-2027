@@ -22,11 +22,10 @@ export function EventsSection() {
   const [hoveredPanelIdx, setHoveredPanelIdx] = useState<number>(0);
 
   const pastEvents = [
-    { title: "ESummit", date: "Feb 10, 2026", image: "/Ashish_Arora.jpeg" },
-    { title: "Emerge", date: "Mar 15, 2026", image: "/Emerge 2.0.jpeg" },
-    { title: "Fetching Fortunes", date: "Apr 05, 2026", image: "/FetchingFortunes.jpeg" },
-    { title: "Founders’ Hive", date: "May 12, 2026", image: "/founders_hive.jpg" },
-    // { title: "Startup Fair", date: "Jun 20, 2026", image: "/StartUpFair.jpeg" }
+    { title: "Founders’ Hive", date: "5th July 2025", image: "/founders_hive.jpg" },
+    { title: "Emerge", date: "11th-12th October 2025", image: "/Emerge 2.0.jpeg" },
+    { title: "E-Summit", date: "13th–15th March 2026", image: "/Ashish_Arora.jpeg" },
+    { title: "Fetching Fortunes", date: "15th March 2026", image: "/FetchingFortunes.jpeg" },
   ];
 
   return (
