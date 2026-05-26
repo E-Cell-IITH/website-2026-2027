@@ -86,7 +86,7 @@ export function EventsSection() {
                   transition={{ duration: 0.3 }}
                   className="absolute inset-0 flex items-center justify-center pointer-events-none"
                 >
-                  <span className="text-white font-bold text-xl md:text-2xl tracking-widest uppercase -rotate-90 whitespace-nowrap">
+                  <span className="text-white font-bold text-xl md:text-2xl tracking-widest uppercase rotate-0 md:-rotate-90 whitespace-nowrap">
                     {event.title}
                   </span>
                 </motion.div>
