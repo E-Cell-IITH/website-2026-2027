@@ -174,12 +174,15 @@ const GLSLHills = ({ width = '100vw', height = '100vh', cameraZ = 125, planeSize
 
     const resize = () => {
       const canvas = canvasRef.current;
-      if (canvas) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        camera.aspect = window.innerWidth / window.innerHeight;
+      const container = containerRef.current;
+      if (canvas && container) {
+        const w = container.clientWidth || window.innerWidth;
+        const h = container.clientHeight || window.innerHeight;
+        canvas.width = w;
+        canvas.height = h;
+        camera.aspect = w / h;
         camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(w, h);
       }
     };
 
@@ -195,14 +198,19 @@ const GLSLHills = ({ width = '100vw', height = '100vh', cameraZ = 125, planeSize
     };
 
     const init = () => {
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x000000, 0);
-      camera.position.set(0, 16, cameraZ);
-      camera.lookAt(new THREE.Vector3(0, 28, 0));
-      scene.add(plane.mesh);
-      window.addEventListener('resize', resize);
-      resize();
-      renderLoop();
+      const container = containerRef.current;
+      if (container) {
+        const w = container.clientWidth || window.innerWidth;
+        const h = container.clientHeight || window.innerHeight;
+        renderer.setSize(w, h);
+        renderer.setClearColor(0x000000, 0);
+        camera.position.set(0, 16, cameraZ);
+        camera.lookAt(new THREE.Vector3(0, 28, 0));
+        scene.add(plane.mesh);
+        window.addEventListener('resize', resize);
+        resize();
+        renderLoop();
+      }
     };
 
     init();

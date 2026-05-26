@@ -11,11 +11,11 @@ export default function Home() {
       <section id="home" className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-black">
         <GLSLHills />
         <div className="space-y-6 pointer-events-none z-10 text-center absolute px-6">
-          <h1 className="font-semibold text-4xl sm:text-5xl md:text-7xl whitespace-pre-wrap text-white">
-            <span className="italic text-3xl sm:text-4xl md:text-6xl font-thin">Ideas That Ignite<br/></span>
+          <h1 className="font-semibold text-5xl sm:text-6xl md:text-8xl whitespace-pre-wrap text-white">
+            <span className="italic text-4xl sm:text-5xl md:text-7xl font-thin">Ideas That Ignite<br/></span>
             E-Cell IIT Hyderabad
           </h1>
-          <p className="text-base md:text-lg text-white/80 max-w-xl mx-auto">
+          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
             From dorm rooms to startups. We fuel the ideas that shape tomorrow.
           </p>
         </div> 
