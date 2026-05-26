@@ -9,7 +9,7 @@ function useCountUp(end: number, duration: number = 2000, startWhenVisible: bool
 
   useEffect(() => {
     if (!startWhenVisible) return;
-    
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -37,12 +37,12 @@ function useCountUp(end: number, duration: number = 2000, startWhenVisible: bool
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = timestamp - startTime;
-      
+
       const percentage = Math.min(progress / duration, 1);
-      
+
       // Easing function: easeOutQuart for smooth deceleration
       const easeProgress = 1 - Math.pow(1 - percentage, 4);
-      
+
       setCount(Math.floor(end * easeProgress));
 
       if (percentage < 1) {
@@ -97,11 +97,11 @@ export function ManifestoStats() {
         </div>
 
         {/* Part 2: Stats Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-6 md:gap-4 border-t border-zinc-800/60 pt-10">
+        <div className="grid grid-cols-3 gap-x-4 md:gap-8 border-t border-zinc-800/60 pt-10">
           <Stat end={12} suffix="+" label="Events" />
-          <Stat end={200} suffix="+" label="Members" />
-          <Stat end={5} suffix="" label="Startups" />
-          <Stat end={8} suffix="" label="Years" />
+          <Stat end={100} suffix="+" label="Members" />
+          {/* <Stat end={5} suffix="" label="Startups" /> */}
+          <Stat end={14} suffix="" label="Years" />
         </div>
       </div>
     </section>
