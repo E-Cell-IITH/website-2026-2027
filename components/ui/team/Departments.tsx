@@ -32,28 +32,26 @@ function MemberCard({
           <MemberPhoto src={img} name={name} fill size={88} />
         </div>
 
-        {/* LinkedIn icon pops out top-right */}
-        {linkedin && (
-          <a
-            href={linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-[#111] border border-white/20 flex items-center justify-center hover:bg-[#0a66c2] hover:border-[#0a66c2] shadow-lg"
-            title="LinkedIn"
-            style={{
-              opacity: hovered ? 1 : 0,
-              transform: hovered ? "scale(1) translateY(0)" : "scale(0.5) translateY(6px)",
-              transition: "opacity 0.2s ease, transform 0.2s ease",
-              pointerEvents: hovered ? "auto" : "none",
-            }}
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
-              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-              <circle cx="4" cy="4" r="2" />
-            </svg>
-          </a>
-        )}
+        {/* LinkedIn icon pops out top-right on hover */}
+        <a
+          href={linkedin ?? "#"}
+          target={linkedin ? "_blank" : undefined}
+          rel={linkedin ? "noopener noreferrer" : undefined}
+          onClick={(e) => e.stopPropagation()}
+          className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-[#111] border border-white/20 flex items-center justify-center hover:bg-[#0a66c2] hover:border-[#0a66c2] shadow-lg"
+          title="LinkedIn"
+          style={{
+            opacity: hovered ? 1 : 0,
+            transform: hovered ? "scale(1) translateY(0)" : "scale(0.5) translateY(6px)",
+            transition: "opacity 0.2s ease, transform 0.2s ease",
+            pointerEvents: hovered ? "auto" : "none",
+          }}
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+            <circle cx="4" cy="4" r="2" />
+          </svg>
+        </a>
       </div>
 
       {/* Name */}
