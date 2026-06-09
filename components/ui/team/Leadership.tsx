@@ -63,7 +63,7 @@ function OCCard({ person, label }: { person: Member; label: string }) {
 
 export default function Leadership() {
   return (
-    <section className="px-4 sm:px-8 md:px-16 lg:px-24 py-20 max-w-[1400px] mx-auto w-full">
+    <section className="px-6 md:px-16 lg:px-24 pt-32 pb-20 max-w-[1400px] mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20">
         <OCCard person={OC_HEAD} label="Overall Head" />
         <div className="lg:border-l lg:border-white/[0.06] lg:pl-20 min-w-0">
