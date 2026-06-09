@@ -16,7 +16,7 @@
  *
  * After running:
  *   - Update every image src in your .tsx / .ts files:
- *       "/Emerge 2.0.jpeg"  →  "/Emerge 2.0.webp"
+ *       "/Emerge 2.0.webp"  →  "/Emerge 2.0.webp"
  *   - Commit both the new .webp files and the updated source references.
  *   - Optionally delete the old originals once everything is verified.
  */
