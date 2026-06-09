@@ -28,7 +28,7 @@ export default function MemberPhoto({ src, name, className = "", fill = false, s
   if (errored) {
     return (
       <div
-        className={`flex items-center justify-center bg-white/[0.04] text-white/20 font-bold select-none ${className}`}
+        className={`w-full h-full flex items-center justify-center bg-white/[0.04] text-white/20 font-bold select-none ${className}`}
         style={{ fontFamily: "'Playfair Display', serif", fontSize: size * 0.35 }}
         aria-label={name}
       >

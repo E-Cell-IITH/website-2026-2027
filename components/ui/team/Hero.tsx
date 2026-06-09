@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import TeamWave from "@/components/ui/team/TeamWave";
 
 const STATS = [
@@ -11,9 +11,6 @@ const STATS = [
 ];
 
 export default function Hero() {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-
-  // Subtle parallax on the ghost year text
   useEffect(() => {
     const ghost = document.getElementById("hero-ghost");
     const onScroll = () => {
@@ -25,14 +22,12 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-24">
-
-      {/* Wave background */}
       <TeamWave />
 
-      {/* Announcement ticker */}
-      <div className="absolute top-0 left-0 right-0 h-9 bg-black/80 border-b border-[#e0506020] flex items-center overflow-hidden z-50">
+      {/* Ticker */}
+      <div className="absolute top-0 left-0 right-0 h-10 bg-black/80 border-b border-[#e0506020] flex items-center overflow-hidden z-50">
         <div
-          className="flex gap-20 whitespace-nowrap text-[11px] text-white/30 tracking-widest"
+          className="flex gap-20 whitespace-nowrap text-[13px] text-white/30 tracking-widest"
           style={{ animation: "ticker 40s linear infinite" }}
         >
           {[0, 1].map((i) => (
@@ -50,7 +45,7 @@ export default function Hero() {
       <span
         id="hero-ghost"
         className="absolute bottom-[-0.05em] left-1/2 -translate-x-1/2 select-none pointer-events-none whitespace-nowrap font-black text-white/[0.025] z-0"
-        style={{ fontSize: "clamp(120px, 22vw, 280px)", fontFamily: "'Playfair Display', serif" }}
+        style={{ fontSize: "clamp(160px, 26vw, 320px)", fontFamily: "'Playfair Display', serif" }}
         aria-hidden
       >
         2026
@@ -58,49 +53,42 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 flex flex-col items-center">
-        <p className="text-[10px] font-medium tracking-[0.25em] uppercase text-white/30 mb-6">
+        <p className="text-[14px] font-medium tracking-[0.25em] uppercase text-white/30 mb-8">
           IIT Hyderabad · 2026–27
         </p>
 
         <h1
-          ref={titleRef}
-          className="leading-[0.9] tracking-tight mb-3"
-          style={{ fontSize: "clamp(3rem, 9vw, 8rem)", fontFamily: "'Playfair Display', serif", fontWeight: 900 }}
+          className="leading-[0.9] tracking-tight mb-4"
+          style={{ fontSize: "clamp(4.5rem, 12vw, 11rem)", fontFamily: "'Playfair Display', serif", fontWeight: 900 }}
         >
           <span className="text-white">Where </span>
-          <span
-            className="italic"
-            style={{
-              color: "transparent",
-              WebkitTextStroke: "2px #e040a0",
-            }}
-          >
+          <span className="italic" style={{ color: "transparent", WebkitTextStroke: "2px #e040a0" }}>
             founders
           </span>
         </h1>
 
         <p
-          className="tracking-tight text-white/15 mb-10"
-          style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)", fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
+          className="tracking-tight text-white/15 mb-12"
+          style={{ fontSize: "clamp(2.8rem, 6.5vw, 6rem)", fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
         >
           come together.
         </p>
 
-        <p className="text-[11px] tracking-[0.3em] uppercase text-white/25 mb-14">
+        <p className="text-[15px] tracking-[0.3em] uppercase text-white/25 mb-16">
           Think &nbsp;·&nbsp; Build &nbsp;·&nbsp; Inspire
         </p>
 
         {/* Stats */}
-        <div className="flex gap-12 sm:gap-16 flex-wrap justify-center">
+        <div className="flex gap-14 sm:gap-20 flex-wrap justify-center">
           {STATS.map((s) => (
             <div key={s.label} className="text-center">
               <div
-                className="text-white font-bold leading-none mb-1"
-                style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontFamily: "'Playfair Display', serif" }}
+                className="text-white font-bold leading-none mb-1.5"
+                style={{ fontSize: "clamp(2.4rem, 5vw, 3.8rem)", fontFamily: "'Playfair Display', serif" }}
               >
                 {s.num}
               </div>
-              <div className="text-[10px] font-medium tracking-[0.2em] uppercase text-white/30">
+              <div className="text-[12px] font-medium tracking-[0.2em] uppercase text-white/30">
                 {s.label}
               </div>
             </div>
