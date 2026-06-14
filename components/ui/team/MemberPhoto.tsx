@@ -25,7 +25,7 @@ export default function MemberPhoto({ src, name, className = "", fill = false, s
   const [errored, setErrored] = useState(false);
   const initials = getInitials(name);
 
-  if (errored) {
+  if (errored || !src || src === "#") {
     return (
       <div
         className={`w-full h-full flex items-center justify-center bg-white/[0.04] text-white/20 font-bold select-none ${className}`}
