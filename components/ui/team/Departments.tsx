@@ -16,6 +16,7 @@ function MemberCard({
   linkedin?: string;
 }) {
   const [hovered, setHovered] = useState(false);
+  const photoSize = 116;
 
   return (
     <div
@@ -26,10 +27,14 @@ function MemberCard({
       {/* Avatar with LinkedIn popping out top-right */}
       <div className="relative">
         <div
-          className="relative w-[88px] h-[88px] rounded-[3px] overflow-hidden bg-white/[0.04] border transition-colors duration-200"
-          style={{ borderColor: hovered ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.06)" }}
+          className="relative rounded-full overflow-hidden bg-white/[0.04] border transition-colors duration-200"
+          style={{
+            width: photoSize,
+            height: photoSize,
+            borderColor: hovered ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.06)",
+          }}
         >
-          <MemberPhoto src={img} name={name} fill size={88} />
+          <MemberPhoto src={img} name={name} fill size={photoSize} />
         </div>
 
         {/* LinkedIn icon pops out top-right on hover */}
@@ -56,7 +61,7 @@ function MemberCard({
 
       {/* Name */}
       <span
-        className="text-[13px] font-medium text-center leading-snug max-w-[96px] transition-colors duration-200"
+        className="text-[13px] font-medium text-center leading-snug max-w-[124px] transition-colors duration-200"
         style={{ color: hovered ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.55)" }}
       >
         {name}
