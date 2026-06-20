@@ -56,8 +56,13 @@ export const DOMAIN_HEADS: DomainHead[] = [
     members: [
       {
         name: "Bhavana Kasula",
-        img: "/team/Bhavana Kasula.webp",
+        img: "/team/BhavanaK.webp",
         linkedin: "https://www.linkedin.com/in/bhavana-kasula-a5917831b",
+      },
+      {
+        name: "Navya Popuri",
+        img: "/team/Navya Popuri.webp",
+        linkedin: "https://www.linkedin.com/in/navya-popuri",
       },
     ],
   },

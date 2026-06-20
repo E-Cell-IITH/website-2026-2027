@@ -16,7 +16,7 @@ function DomainMemberRow({ member }: { member: { name: string; img: string; emai
       {/* Avatar with icons popping out top-right */}
       <div className="relative flex-shrink-0">
         <div className="relative w-33 h-33 rounded-[3px] overflow-hidden bg-white/[0.04]">
-          <MemberPhoto src={member.img} name={member.name} fill size={96} />
+          <MemberPhoto src={member.img} name={member.name} fill size={96} priority={true} />
         </div>
 
         {/* Icons appear top-right of avatar */}

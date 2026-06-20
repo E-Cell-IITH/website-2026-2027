@@ -9,11 +9,13 @@ function MemberCard({
   img,
   email,
   linkedin,
+  priority = false,
 }: {
   name: string;
   img: string;
   email?: string;
   linkedin?: string;
+  priority?: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
   const photoSize = 116;
@@ -34,7 +36,7 @@ function MemberCard({
             borderColor: hovered ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.06)",
           }}
         >
-          <MemberPhoto src={img} name={name} fill size={photoSize} />
+          <MemberPhoto src={img} name={name} fill size={photoSize} priority={priority} />
         </div>
 
         {/* LinkedIn icon pops out top-right on hover */}
@@ -71,6 +73,7 @@ function MemberCard({
 }
 
 export default function Departments() {
+  let memberCount = 0; 
   return (
     <div className="border-t border-white/[0.06]">
       {DEPARTMENTS.map((dept, i) => (
@@ -99,15 +102,20 @@ export default function Departments() {
               Managers
             </p>
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 xl:grid-cols-5 gap-8">
-              {dept.members.map((m) => (
-                <MemberCard
-                  key={m.name}
-                  name={m.name}
-                  img={m.img}
-                  email={m.email}
-                  linkedin={m.linkedin}
-                />
-              ))}
+              {dept.members.map((m) => {
+                const isPriority = memberCount < 3;
+                memberCount++;
+                return (
+                  <MemberCard
+                    key={m.name}
+                    name={m.name}
+                    img={m.img}
+                    email={m.email}
+                    linkedin={m.linkedin}
+                    priority={isPriority}
+                  />
+                );
+             })}
             </div>
           </div>
         </section>
