@@ -22,7 +22,7 @@ function OCCard({ person, label }: { person: Member; label: string }) {
       {/* Top row — photo + name */}
       <div className="flex flex-row gap-6 items-center">
         <div className="relative w-36 h-36 sm:w-44 sm:h-44 flex-shrink-0 rounded-sm overflow-hidden bg-white/[0.04]">
-          <MemberPhoto src={person.img} name={person.name} fill />
+          <MemberPhoto src={person.img} name={person.name} fill priority={true} />
         </div>
         <div className="min-w-0">
           <p className="text-[13px] tracking-[0.22em] uppercase text-white/30 mb-2">{label}</p>

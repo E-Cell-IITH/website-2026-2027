@@ -9,11 +9,13 @@ function MemberCard({
   img,
   email,
   linkedin,
+  priority = false,
 }: {
   name: string;
   img: string;
   email?: string;
   linkedin?: string;
+  priority?: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
   const photoSize = 116;
@@ -34,7 +36,7 @@ function MemberCard({
             borderColor: hovered ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.06)",
           }}
         >
-          <MemberPhoto src={img} name={name} fill size={photoSize} />
+          <MemberPhoto src={img} name={name} fill size={photoSize} priority={priority} />
         </div>
 
         {/* LinkedIn icon pops out top-right on hover */}
@@ -79,9 +81,6 @@ export default function Departments() {
           className="flex flex-col lg:flex-row border-b border-white/[0.06]"
         >
           <div className="lg:w-[320px] xl:w-[380px] flex-shrink-0 px-6 md:px-12 lg:px-16 py-16 lg:border-r border-white/[0.06] lg:sticky lg:top-20 self-start">
-            <p className="text-[12px] tracking-[0.2em] uppercase text-white/20 mb-3">
-              Department {String(i + 1).padStart(2, "0")}
-            </p>
             <h3
               className="text-white font-bold tracking-tight leading-[1.1] mb-5"
               style={{ fontSize: "clamp(1.7rem, 2.8vw, 2.4rem)", fontFamily: "'Playfair Display', serif" }}
