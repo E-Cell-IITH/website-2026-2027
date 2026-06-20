@@ -73,7 +73,6 @@ function MemberCard({
 }
 
 export default function Departments() {
-  let memberCount = 0; 
   return (
     <div className="border-t border-white/[0.06]">
       {DEPARTMENTS.map((dept, i) => (
@@ -82,9 +81,6 @@ export default function Departments() {
           className="flex flex-col lg:flex-row border-b border-white/[0.06]"
         >
           <div className="lg:w-[320px] xl:w-[380px] flex-shrink-0 px-6 md:px-12 lg:px-16 py-16 lg:border-r border-white/[0.06] lg:sticky lg:top-20 self-start">
-            <p className="text-[12px] tracking-[0.2em] uppercase text-white/20 mb-3">
-              Department {String(i + 1).padStart(2, "0")}
-            </p>
             <h3
               className="text-white font-bold tracking-tight leading-[1.1] mb-5"
               style={{ fontSize: "clamp(1.7rem, 2.8vw, 2.4rem)", fontFamily: "'Playfair Display', serif" }}
@@ -102,20 +98,15 @@ export default function Departments() {
               Managers
             </p>
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 xl:grid-cols-5 gap-8">
-              {dept.members.map((m) => {
-                const isPriority = memberCount < 3;
-                memberCount++;
-                return (
-                  <MemberCard
-                    key={m.name}
-                    name={m.name}
-                    img={m.img}
-                    email={m.email}
-                    linkedin={m.linkedin}
-                    priority={isPriority}
-                  />
-                );
-             })}
+              {dept.members.map((m) => (
+                <MemberCard
+                  key={m.name}
+                  name={m.name}
+                  img={m.img}
+                  email={m.email}
+                  linkedin={m.linkedin}
+                />
+              ))}
             </div>
           </div>
         </section>
