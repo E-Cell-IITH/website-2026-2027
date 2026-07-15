@@ -68,7 +68,7 @@ const Tab = ({
 }: {
   children: React.ReactNode;
   setPosition: any;
-  onClick: () => void;
+  onClick: () => void
 }) => {
   const ref = useRef<HTMLLIElement>(null);
   return (
@@ -88,6 +88,7 @@ const Tab = ({
       className="relative z-10 block cursor-pointer px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-white mix-blend-difference md:px-4 md:py-1.5 md:text-xs select-none"
     >
       {children}
+     
     </li>
   );
 };

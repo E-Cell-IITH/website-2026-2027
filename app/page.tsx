@@ -23,10 +23,10 @@ export default function Home() {
 
       {/* Manifesto & Stats Section */}
       <ManifestoStats />
-
+      
       {/* Events Section */}
       <EventsSection />
-
+      
       {/* Previous Speakers Section */}
       <PreviousSpeakers />
 
