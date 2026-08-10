@@ -1,38 +1,26 @@
-import { GLSLHills } from "@/components/ui/glsl-hills";
+import HeroSection from "@/components/ui/hero-section";
 import { ManifestoStats } from "@/components/ui/manifesto-stats";
 import { EventsSection } from "@/components/ui/events-section";
 import { PreviousSpeakers } from "@/components/ui/previous-speakers";
-import { SponsorsSection } from "@/components/ui/sponsors-section";
+import { SponsorsSection } from "@/components/ui/contact-footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#080808]">
+    <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* Hero Section */}
-      <section id="home" className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-black">
-        <GLSLHills />
-        <div className="space-y-6 pointer-events-none z-10 text-center absolute px-6">
-          <h1 className="font-semibold text-5xl sm:text-6xl md:text-8xl whitespace-pre-wrap text-white">
-            <span className="italic text-4xl sm:text-5xl md:text-7xl font-thin">Ideas That Ignite<br/></span>
-            E-Cell IIT Hyderabad
-          </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-            From dorm rooms to startups. We fuel the ideas that shape tomorrow.
-          </p>
-        </div> 
-      </section>
+      <HeroSection/>
 
-      {/* Manifesto & Stats Section */}
+      {/* Stats + About */}
       <ManifestoStats />
-      
+
       {/* Events Section */}
       <EventsSection />
-      
+
       {/* Previous Speakers Section */}
       <PreviousSpeakers />
 
-      {/* Sponsors Section */}
+      {/* CTA + Contact + Footer */}
       <SponsorsSection />
-      
     </main>
   );
 }

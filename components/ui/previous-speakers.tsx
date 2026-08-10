@@ -1,208 +1,172 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import React from "react";
-import {
-  Autoplay,
-  EffectCoverflow,
-  Navigation,
-  Pagination,
-} from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const Carousel_003 = ({
-  images,
-  className,
-  showPagination = false,
-  showNavigation = false,
-  loop = true,
-  autoplay = false,
-  spaceBetween = 0,
-}: {
-  images: { src: string; alt: string; name: string; role: string }[];
-  className?: string;
-  showPagination?: boolean;
-  showNavigation?: boolean;
-  loop?: boolean;
-  autoplay?: boolean;
-  spaceBetween?: number;
-}) => {
-  const css = `
-  .Carousal_003 {
-    width: 100%;
-    height: 450px;
-    padding-bottom: 50px !important;
-  }
-  
-  .Carousal_003 .swiper-slide {
-    background-position: center;
-    background-size: cover;
-    width: 320px;
-    border-radius: 1rem;
-    overflow: hidden;
-  }
+const SPEAKERS = [
+  {
+    name: "Upasana Kamineni",
+    role: "VC of the Apollo Foundation, Founder and MD of URLife",
+    img: "/speakers/Upasana.jpg",
+  },
+  {
+    name: "Anup Gupta",
+    role: "Founder and CEO of MathonGo",
+    img: "/speakers/Anup Gupta.webp",
+  },
+  {
+    name: "Ashish Arora",
+    role: "Founder and Chief Mentor of Physics Galaxy",
+    img: "/speakers/Ashish_Arora.webp",
+  },
+  {
+    name: "Akhil Gupta",
+    role: "Founder, No Broker",
+    img: "/speakers/Akhil Gupta, Founder, Nobroker.webp",
+  },
+  {
+    name: "Devvrat Arya",
+    role: "VP of Technology, Pepperfry",
+    img: "/speakers/Devvrat Arya - VP of Technology, Pepperfry.webp",
+  },
+  {
+    name: "TN Hari",
+    role: "HR Head, Big Basket",
+    img: "/speakers/TN Hari - HR Head, BigBasket.webp",
+  },
+  {
+    name: "Shashank Randev",
+    role: "Founder VC, 100X.VC",
+    img: "/speakers/Shashank Randev - Founder VC, 100X.VC.jpg",
+  },
+];
 
-  .swiper-pagination-bullet {
-    background-color: #fff !important;
-    opacity: 0.3;
-  }
-  .swiper-pagination-bullet-active {
-    background-color: #fff !important;
-    opacity: 1;
-  }
-`;
+function SpeakersCarousel() {
+  const [active, setActive] = useState(0);
+  const n = SPEAKERS.length;
+
+  const prev = () => setActive((i) => (i - 1 + n) % n);
+  const next = () => setActive((i) => (i + 1) % n);
+
+  const getProps = (idx: number) => {
+    let dist = idx - active;
+    if (dist > n / 2) dist -= n;
+    if (dist < -n / 2) dist += n;
+    const abs = Math.abs(dist);
+    return {
+      visible: abs <= 2,
+      scale: dist === 0 ? 1 : abs === 1 ? 0.83 : 0.68,
+      opacity: dist === 0 ? 1 : abs === 1 ? 0.65 : 0.35,
+      translateX: dist * 215,
+      zIndex: 20 - abs * 4,
+    };
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0, translateY: 20 }}
-      whileInView={{ opacity: 1, translateY: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-      className={`relative w-full max-w-6xl px-5 mx-auto ${className || ""}`}
-    >
-      <style>{css}</style>
+    <div>
+      <div className="relative overflow-hidden" style={{ height: "340px" }}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          {SPEAKERS.map((s, i) => {
+            const { visible, scale, opacity, translateX, zIndex } = getProps(i);
+            if (!visible) return null;
+            return (
+              <div
+                key={s.name + i}
+                className="absolute cursor-pointer"
+                style={{
+                  transform: `translateX(${translateX}px) scale(${scale})`,
+                  opacity,
+                  zIndex,
+                  transition: "all 0.45s cubic-bezier(0.4, 0, 0.2, 1)",
+                }}
+                onClick={() => setActive(i)}
+              >
+                <div
+                  style={{
+                    width: "172px",
+                    borderRadius: "14px",
+                    overflow: "hidden",
+                    background: "#0d0d18",
+                    border: "1px solid rgba(255,255,255,0.07)",
+                    boxShadow: i === active ? "0 0 40px rgba(20,0,255,0.3)" : "none",
+                  }}
+                >
+                  <img
+                    src={s.img}
+                    alt={s.name}
+                    className="w-full object-cover"
+                    style={{ height: "210px" }}
+                  />
+                  <div className="p-3 text-center">
+                    <div className="font-display font-bold text-white leading-tight" style={{ fontSize: "0.95rem" }}>
+                      {s.name}
+                    </div>
+                    <div className="text-[11px] mt-0.5 leading-snug" style={{ color: "#7888cc" }}>
+                      {s.role}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-        className="w-full"
-      >
-        <Swiper
-          spaceBetween={spaceBetween}
-          autoplay={
-            autoplay
-              ? {
-                delay: 2500,
-                disableOnInteraction: true,
-              }
-              : false
-          }
-          effect="coverflow"
-          grabCursor={true}
-          slidesPerView="auto"
-          centeredSlides={true}
-          loop={loop}
-          coverflowEffect={{
-            rotate: 30,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true,
+        <button
+          onClick={prev}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110 active:scale-95"
+          style={{
+            background: "rgba(20,0,255,0.25)",
+            border: "1px solid rgba(20,0,255,0.5)",
+            color: "white",
           }}
-          pagination={
-            showPagination
-              ? {
-                clickable: true,
-              }
-              : false
-          }
-          navigation={
-            showNavigation
-              ? {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-              }
-              : false
-          }
-          className="Carousal_003"
-          modules={[EffectCoverflow, Autoplay, Pagination, Navigation]}
+          aria-label="Previous speaker"
         >
-          {images.map((image, index) => (
-            <SwiperSlide key={index} className="relative group">
-              <img
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                src={image.src}
-                alt={image.alt}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end">
-                <h3 className="text-2xl font-bold text-white mb-1">{image.name}</h3>
-                <p className="text-sm font-mono text-zinc-400">{image.role}</p>
-              </div>
-            </SwiperSlide>
-          ))}
-          {showNavigation && (
-            <div>
-              <div className="swiper-button-next after:hidden">
-                <ChevronRightIcon className="h-8 w-8 text-white drop-shadow-lg" />
-              </div>
-              <div className="swiper-button-prev after:hidden">
-                <ChevronLeftIcon className="h-8 w-8 text-white drop-shadow-lg" />
-              </div>
-            </div>
-          )}
-        </Swiper>
-      </motion.div>
-    </motion.div>
-  );
-};
-
-export function PreviousSpeakers() {
-  const speakers = [
-    {
-      src: "/speakers/Upasana.jpg",
-      alt: "Upasana",
-      name: "Upasana Kamineni",
-      role: "VC of the Apollo Foundation, Founder and MD of URLife",
-    },
-    {
-      src: "/speakers/Anup Gupta.webp",
-      alt: "Anup Gupta",
-      name: "Anup Gupta",
-      role: "Founder and CEO of MathonGo",
-    },
-    {
-      src: "/speakers/Ashish_Arora.webp",
-      alt: "Ashish Arora",
-      name: "Ashish Arora",
-      role: "Founder and Chief Mentor of Physics Galaxy",
-    },
-    {
-      src: "/speakers/Akhil Gupta, Founder, Nobroker.webp",
-      alt: "Akhil Gupta",
-      name: "Akhil Gupta",
-      role: "Founder, No Broker",
-    },
-    {
-      src: "/speakers/Devvrat Arya - VP of Technology, Pepperfry.webp",
-      alt: "Devvrat Arya",
-      name: "Devvrat Arya",
-      role: "VP of Technology, Pepperfry",
-    },
-    {
-      src: "/speakers/TN Hari - HR Head, BigBasket.webp",
-      alt: "TN Hari",
-      name: "TN Hari",
-      role: "HR Head, Big Basket",
-    },
-    {
-      src: "/speakers/Shashank Randev - Founder VC, 100X.VC.jpg",
-      alt: "Shashank Randev",
-      name: "Shashank Randev",
-      role: "Founder VC, 100X.VC",
-    },
-  ];
-
-  return (
-    <section className="relative w-full bg-[#080808] overflow-hidden py-32 border-t border-white/5">
-      <div className="container mx-auto px-6 lg:px-8 max-w-7xl mb-16 text-center">
-        <h2 className="text-xs font-semibold tracking-[0.2em] text-zinc-500 uppercase mb-4">Insights From</h2>
-        <h3 className="text-4xl md:text-5xl font-bold text-white tracking-tight">Previous Speakers</h3>
+          <ChevronLeft size={18} />
+        </button>
+        <button
+          onClick={next}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110 active:scale-95"
+          style={{
+            background: "rgba(20,0,255,0.25)",
+            border: "1px solid rgba(20,0,255,0.5)",
+            color: "white",
+          }}
+          aria-label="Next speaker"
+        >
+          <ChevronRight size={18} />
+        </button>
       </div>
 
-      <div className="w-full">
-        <Carousel_003
-          images={speakers}
-          showPagination={true}
-          showNavigation={true}
-          autoplay={true}
-          loop={true}
-        />
+      <div className="flex justify-center gap-2 mt-4">
+        {SPEAKERS.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            aria-label={`Speaker ${i + 1}`}
+            className="rounded-full transition-all duration-300"
+            style={{
+              width: i === active ? "24px" : "8px",
+              height: "8px",
+              background: i === active ? "#1400ff" : "rgba(255,255,255,0.2)",
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function PreviousSpeakers() {
+  return (
+    <section id="speakers" className="py-20" style={{ background: "rgba(5,8,28,0.95)" }}>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-12">
+          <p className="text-xs font-eyebrow uppercase tracking-widest mb-3" style={{ color: "#7888cc" }}>
+            Past Edition
+          </p>
+          <h2 className="text-4xl md:text-5xl font-display font-bold">Previous Speakers</h2>
+        </div>
+        <SpeakersCarousel />
       </div>
     </section>
   );
