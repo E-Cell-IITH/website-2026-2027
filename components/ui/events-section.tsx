@@ -81,7 +81,7 @@ export function EventsSection() {
     { name: "E-Summit", action: () => router.push("/coming"), active: false },
     { name: "Emerge", action: () => router.push("/coming"), active: false },
     { name: "Founders' Hive", action: () => router.push("/foundersHive"), active: false,},
-    { name: "Startup Studio",action: () => router.push("/coming"),active: false,},
+    { name: "Startup Studio",action: () => router.push("/startup-studio"),active: false,},
   ];
   return (
     <section
