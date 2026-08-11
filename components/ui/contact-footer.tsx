@@ -47,7 +47,7 @@ export function SponsorsSection() {
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Let&apos;s Talk</h2>
             <p className="mb-10 leading-relaxed" style={{ color: "#7888cc" }}>
               Whether you want to collaborate, sponsor our events, or just want to learn more about
-              what we do — we&apos;re always open to a conversation.
+              what we do, we&apos;re always open to a conversation.
             </p>
             <div className="flex flex-col gap-5">
               {CONTACT_INFO.map((c) => {
@@ -95,7 +95,7 @@ export function SponsorsSection() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t" style={{ borderColor: "rgba(20,0,255,0.15)", background: "rgba(7,13,46,0.8)" }}>
+      {/* <footer className="py-12 px-6 border-t" style={{ borderColor: "rgba(20,0,255,0.15)", background: "rgba(7,13,46,0.8)" }}>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center font-display font-bold text-white text-sm" style={{ background: "linear-gradient(135deg, #1400ff, #2d3bff)" }}>
@@ -110,7 +110,7 @@ export function SponsorsSection() {
             © 2026 E-Cell IIT Hyderabad. Building the future, one startup at a time.
           </p>
         </div>
-      </footer>
+      </footer> */}
     </>
   );
 }

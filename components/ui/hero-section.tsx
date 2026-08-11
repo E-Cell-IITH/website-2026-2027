@@ -30,13 +30,6 @@ export default function HeroSection(){
         {/* content */}
 
         <div className="relative z-10 max-w-4xl mx-auto">
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest mb-8 font-eyebrow"
-            style={{ border: "1px solid rgba(20,0,255,0.5)", background: "rgba(20,0,255,0.12)", color: "#7888cc" }}
-          >
-            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-            IIT Hyderabad&apos;s Premier Entrepreneurship Cell
-          </div>
 
           <h1 className="text-6xl md:text-8xl font-display font-bold leading-none tracking-tight mb-6">
             <span className="text-white">BUILD.</span>{" "}
@@ -45,11 +38,11 @@ export default function HeroSection(){
           </h1>
 
           <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed" style={{ color: "#7888cc" }}>
-            E-Cell IIT Hyderabad is the nexus of startup culture on campus — fostering innovation,
+            E-Cell IIT Hyderabad is the nexus of startup culture on campus fostering innovation,
             connecting founders with mentors, and building the entrepreneurs of tomorrow.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="#events"
               className="group px-8 py-3.5 rounded-lg font-semibold text-white flex items-center justify-center gap-2 transition-all hover:scale-105 active:scale-95"
@@ -65,7 +58,7 @@ export default function HeroSection(){
             >
               About Us
             </a>
-          </div>
+          </div> */}
         </div>
 
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2">

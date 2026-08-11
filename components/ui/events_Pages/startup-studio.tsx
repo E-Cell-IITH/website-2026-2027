@@ -249,28 +249,6 @@ export default function StartupStudioPage() {
         </div>
       </section>
       
-      {/* FOOTER */}
-      <footer className="py-12 px-6 border-t" style={{ borderColor: "rgba(20,0,255,0.15)", background: "rgba(7,13,46,0.8)" }}>
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-3">
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center font-display font-bold text-white text-sm"
-              style={{ background: "linear-gradient(135deg, #1400ff, #2d3bff)" }}
-            >
-              E
-            </div>
-            <div className="font-display">
-              <span className="text-base font-bold text-white leading-none">E-CELL</span>
-              <span className="block text-[9px] tracking-[0.2em] uppercase" style={{ color: "#4d6eff" }}>
-                IIT HYDERABAD
-              </span>
-            </div>
-          </div>
-          <p className="text-xs" style={{ color: "#7888cc" }}>
-            © 2026 E-Cell IIT Hyderabad. Building the future, one startup at a time.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }
