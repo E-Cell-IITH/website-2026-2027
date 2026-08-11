@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useRef, useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 
 function NavHeader() {
@@ -15,12 +14,26 @@ function NavHeader() {
   const pathname = usePathname();
 
   const navItems = [
-    { label: "Home", target: "home", isPage: false },
     { label: "About", target: "about", isPage: false },
     { label: "Events", target: "events", isPage: false },
-    { label: "Team", target: "team", isPage: true },
+    { label: "Speakers", target: "speakers", isPage: false },
+    // { label: "Team", target: "team", isPage: true },
     { label: "Contact", target: "contact", isPage: false },
   ];
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Anything other than the homepage (an event detail page, /team, etc.)
+  // gets the "← Back" treatment instead of the full nav + CTA.
+  const isHome = pathname === "/";
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
 
   const handleNavClick = (target: string, isPage: boolean) => {
     if (isPage) {
@@ -41,65 +54,108 @@ function NavHeader() {
     }
   };
 
-  return (
-    <ul
-      className="relative mx-auto flex w-fit rounded-full border border-white/10 bg-black/60 backdrop-blur-md p-1 shadow-2xl"
-      onMouseLeave={() => setPosition((pv) => ({ ...pv, opacity: 0 }))}
-    >
-      {navItems.map((item) => (
-        <Tab
-          key={item.label}
-          setPosition={setPosition}
-          onClick={() => handleNavClick(item.target, item.isPage)}
-        >
-          {item.label}
-        </Tab>
-      ))}
+  const goHome = () => {
+    setMenuOpen(false);
+    if (pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      router.push("/");
+    }
+  };
 
-      <Cursor position={position} />
-    </ul>
+  return (
+    <header
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+      style={{
+        background: scrolled || !isHome ? "rgba(3,6,26,0.92)" : "transparent",
+        backdropFilter: scrolled || !isHome ? "blur(12px)" : "none",
+        borderBottom: scrolled || !isHome ? "1px solid rgba(20,0,255,0.18)" : "none",
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <button onClick={goHome} className="flex items-center gap-3">
+          <div
+            className="w-9 h-9 rounded-lg flex items-center justify-center font-display font-bold text-white"
+            style={{ background: "linear-gradient(135deg, #1400ff, #2d3bff)" }}
+          >
+            <img
+              src={"/ECELL_Logo.webp"}
+              alt="E-Cell IIT Hyderabad Logo"
+              className="w-9 h-9 rounded-lg object-cover"
+            />
+          </div>
+          <div className="font-display">
+            <span className="text-lg font-bold text-white leading-none tracking-wide">
+              E-CELL
+            </span>
+            <span
+              className="block text-[10px] tracking-[0.2em] uppercase leading-none mt-0.5"
+              style={{ color: "#4d6eff" }}
+            >
+              IIT HYDERABAD
+            </span>
+          </div>
+        </button>
+
+        {isHome ? (
+          <>
+            <nav className="hidden md:flex items-center gap-8">
+              {navItems.map((l) => (
+                <button
+                  key={l.label}
+                  onClick={() => handleNavClick(l.target, l.isPage)}
+                  className="text-sm tracking-wide transition-colors hover:text-white"
+                  style={{ color: "#7888cc" }}
+                >
+                  {l.label}
+                </button>
+              ))}
+              <button
+                onClick={() => handleNavClick("contact", false)}
+                className="px-4 py-2 rounded-lg text-sm font-semibold text-white transition-all hover:scale-105 active:scale-95 brand-gradient brand-glow"
+              >
+                Join Us
+              </button>
+            </nav>
+
+            <button
+              className="md:hidden text-white p-2"
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-label="Toggle menu"
+            >
+              {menuOpen ? "✕" : "☰"}
+            </button>
+          </>
+        ) : (
+          <button
+            onClick={() => router.push("/")}
+            className="flex items-center gap-2 text-sm tracking-wide transition-colors hover:text-white"
+            style={{ color: "#7888cc" }}
+          >
+            <span aria-hidden="true">←</span> Back
+          </button>
+        )}
+      </div>
+
+      {isHome && menuOpen && (
+        <div
+          className="md:hidden px-6 pb-6 pt-2 flex flex-col gap-4"
+          style={{ background: "rgba(3,6,26,0.97)" }}
+        >
+          {navItems.map((l) => (
+            <button
+              key={l.label}
+              onClick={() => handleNavClick(l.target, l.isPage)}
+              className="text-left text-base py-2 border-b"
+              style={{ color: "#c0caff", borderColor: "rgba(20,0,255,0.15)" }}
+            >
+              {l.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </header>
   );
 }
-
-const Tab = ({
-  children,
-  setPosition,
-  onClick,
-}: {
-  children: React.ReactNode;
-  setPosition: any;
-  onClick: () => void
-}) => {
-  const ref = useRef<HTMLLIElement>(null);
-  return (
-    <li
-      ref={ref}
-      onMouseEnter={() => {
-        if (!ref.current) return;
-
-        const { width } = ref.current.getBoundingClientRect();
-        setPosition({
-          width,
-          opacity: 1,
-          left: ref.current.offsetLeft,
-        });
-      }}
-      onClick={onClick}
-      className="relative z-10 block cursor-pointer px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-white mix-blend-difference md:px-4 md:py-1.5 md:text-xs select-none"
-    >
-      {children}
-     
-    </li>
-  );
-};
-
-const Cursor = ({ position }: { position: any }) => {
-  return (
-    <motion.li
-      animate={position}
-      className="absolute z-0 h-6 rounded-full bg-white md:h-7 top-1"
-    />
-  );
-};
 
 export default NavHeader;

@@ -235,7 +235,7 @@ export const DEPARTMENTS: Department[] = [
     desc: "Building and maintaining E-Cell's digital presence. The web team creates innovative platforms, manages the online ecosystem, and develops cutting-edge solutions for the community.",
     members: [
       { name: "Pritam Bagle", img: "/team/Pritam Bagle.webp", linkedin: "https://www.linkedin.com/in/pritam-bagle-66a9b5369" },
-      { name: "V Madhu Srujan Sarvajith", img: "/team/Madhu.webp", linkedin: "https://www.linkedin.com/in/v-madhu-srujan-sarvajith-6a6647379" },
+      { name: "Madhu Srujan Sarvajith V", img: "/team/Madhu.webp", linkedin: "https://www.linkedin.com/in/vmss2727" },
       { name: "Shourya", img: "/team/Shourya.webp", linkedin: "https://www.linkedin.com/in/uddeep-sri-shourya-dandu-71017a3ba" },
     ],
   },

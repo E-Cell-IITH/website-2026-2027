@@ -29,12 +29,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        {/* Floating Navigation Header */}
-        <div className="fixed top-10 left-0 right-0 z-50 flex justify-center pointer-events-none">
-          <div className="pointer-events-auto">
-            <NavHeader />
-          </div>
-        </div>
+        <NavHeader />
 
         <main className="flex-grow">
           {children}

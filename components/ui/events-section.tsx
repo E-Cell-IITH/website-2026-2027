@@ -1,21 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-/*
-function getTagColor(type: string) {
-  switch (type.toLowerCase()) {
-    case "hackathon":
-      return "text-orange-400 bg-orange-400/10 border-orange-400/20";
-    case "talk":
-      return "text-blue-400 bg-blue-400/10 border-blue-400/20";
-    case "workshop":
-      return "text-purple-400 bg-purple-400/10 border-purple-400/20";
-    default:
-      return "text-zinc-400 bg-zinc-400/10 border-zinc-400/20";
-  }
-}
-*/
+import { motion } from "framer-motion";
+
 const Tab = ({
   children,
   setPosition,
@@ -46,7 +33,7 @@ const Tab = ({
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
       className={`relative z-10 px-4 py-2.5 rounded-xl text-xs md:text-sm font-medium tracking-wide transition-colors duration-200 text-center whitespace-nowrap select-none flex flex-col items-center justify-center ${
-        active || isHovered ? "text-black" : "text-zinc-400"
+        active || isHovered ? "text-white" : "text-[#7888cc]"
       }`}
     >
       <span className={active || isHovered ? "font-semibold" : "font-medium"}>
@@ -67,46 +54,40 @@ export function EventsSection() {
   const [position, setPosition] = useState({ left: 0, width: 0, opacity: 0 });
   const pastEvents = [
     {
-      title: "Founders’ Hive",
-      date: "5th July 2025",
-      image: "/founders_hive.webp",
-    },
-    {
-      title: "Emerge",
-      date: "11th-12th October 2025",
-      image: "/Emerge 2.0.webp",
-    },
-    {
       title: "E-Summit",
-      date: "13th–15th March 2026",
+      date: "OCT 18-20, 2025",
       image: "/Ashish_Arora.jpeg",
     },
     {
-      title: "Fetching Fortunes",
-      date: "15th March 2026",
-      image: "/FetchingFortunes.webp",
+      title: "Emerge",
+      date: "SEP 6, 2025",
+      image: "/Emerge 2.0.webp",
+    },
+    {
+      title: "Founders' Hive",
+      date: "AUG 22, 2025",
+      image: "/founders_hive.webp",
+    },
+    {
+      title: "Startup Studio",
+      date: "AUG 1 - SEP 14, 2025",
+      image: "/StartUpFair.webp",
     },
   ];
+
   const router = useRouter();
 
   const programs = [
-    {
-      name: "Founders' Hive",
-      action: () => router.push("/foundersHive"),
-      active: false,
-    },
     { name: "E-Summit", action: () => router.push("/coming"), active: false },
     { name: "Emerge", action: () => router.push("/coming"), active: false },
-    {
-      name: "Startup Studio",
-      action: () => router.push("/coming"),
-      active: false,
-    },
+    { name: "Founders' Hive", action: () => router.push("/foundersHive"), active: false,},
+    { name: "Startup Studio",action: () => router.push("/coming"),active: false,},
   ];
   return (
     <section
       id="events"
-      className="relative w-full bg-[#080808] overflow-hidden py-24"
+      className="relative w-full overflow-hidden py-24"
+      style={{ background: "rgba(5,8,28,0.95)" }}
     >
       {/* Required CSS for marquee */}
       <style
@@ -124,29 +105,31 @@ export function EventsSection() {
       />
 
       {/* Looping Marquee */}
-      <div className="w-full flex overflow-hidden border-y border-white/5 bg-[#0a0a0a] py-4 mb-24">
+      <div
+        className="w-full flex overflow-hidden border-y py-4 mb-24"
+        style={{ borderColor: "rgba(20,0,255,0.15)", background: "rgba(3,6,26,0.6)" }}
+      >
         <div className="flex animate-marquee whitespace-nowrap">
           {Array.from({ length: 4 }).map((_, i) => (
             <span
               key={i}
-              className="text-sm font-mono tracking-[0.2em] text-zinc-600 px-4 uppercase"
+              className="font-eyebrow text-sm tracking-[0.2em] text-[#5a6aa8] px-4 uppercase"
             >
               IDEATE · PITCH · BUILD · LAUNCH · NETWORK ·
             </span>
           ))}
         </div>
       </div>
-
       <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
         {/* Header */}
         {/* RESTRUCTURED HEADER BLOCK */}
         <div className="mb-4 md:mb-16 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-          <h2 className="text-5xl md:text-7xl font-sans font-bold text-white tracking-tight">
+          <h2 className="font-display text-5xl md:text-7xl font-bold text-white tracking-tight">
             Events & Programs
           </h2>
 
           <div className="w-full lg:w-auto">
-            <h3 className="text-left lg:text-center font-sans font-bold text-zinc-500 text-xs tracking-wider uppercase mb-2">
+            <h3 className="font-eyebrow text-left lg:text-center font-bold text-[#7888cc] text-xs tracking-wider uppercase mb-2">
               Click to get more info:
             </h3>
 
@@ -154,7 +137,8 @@ export function EventsSection() {
             {/* Updated switcher wrapper with custom dynamic slider cursor */}
             <div
               onMouseLeave={() => setPosition((pv) => ({ ...pv, opacity: 0 }))}
-              className="relative grid grid-cols-2 sm:flex sm:flex-wrap gap-2 bg-zinc-900/60 p-1.5 rounded-2xl border border-white/5 backdrop-blur-md w-full sm:w-fit max-w-full"
+              className="relative grid grid-cols-2 sm:flex sm:flex-wrap gap-2 p-1.5 rounded-2xl backdrop-blur-md w-full sm:w-fit max-w-full"
+              style={{ background: "rgba(7,13,46,0.6)", border: "1px solid rgba(20,0,255,0.2)" }}
             >
               {programs.map((prog) => (
                 <Tab
@@ -171,11 +155,11 @@ export function EventsSection() {
               <motion.div
                 animate={position}
                 transition={{ type: "spring", stiffness: 250, damping: 25 }}
-                className="absolute bottom-1.5 top-1.5 z-0 rounded-xl bg-white shadow-lg shadow-white/5"
+                className="absolute bottom-1.5 top-1.5 z-0 rounded-xl brand-gradient brand-glow"
                 style={{
                   left: position.left,
                   width: position.width,
-                  opacity: position.opacity, // Added here to make sure it hides cleanly
+                  opacity: position.opacity,
                 }}
               />
             </div>
@@ -190,7 +174,7 @@ export function EventsSection() {
                 onMouseEnter={() => setHoveredPanelIdx(idx)}
                 animate={{ flex: hoveredPanelIdx === idx ? 4 : 1 }}
                 transition={{ type: "spring", stiffness: 120, damping: 18 }}
-                className="relative h-full overflow-hidden cursor-pointer bg-[#111111]"
+                className="relative h-full overflow-hidden cursor-pointer bg-[#0a0e2e]"
               >
                 {/* Background Image */}
                 <img
@@ -198,7 +182,7 @@ export function EventsSection() {
                   alt={event.title}
                   className="absolute inset-0 w-full h-full object-cover opacity-80"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-[#080808] via-[#080808]/40 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-[#03061a] via-[#03061a]/50 to-transparent" />
 
                 {/* Collapsed State Title */}
                 <motion.div
@@ -206,7 +190,7 @@ export function EventsSection() {
                   transition={{ duration: 0.3 }}
                   className="absolute inset-0 flex items-center justify-center pointer-events-none"
                 >
-                  <span className="text-white font-bold text-xl md:text-2xl tracking-widest uppercase rotate-0 md:-rotate-90 whitespace-nowrap">
+                  <span className="font-display text-white font-bold text-xl md:text-2xl tracking-widest uppercase rotate-0 md:-rotate-90 whitespace-nowrap">
                     {event.title}
                   </span>
                 </motion.div>
@@ -224,11 +208,11 @@ export function EventsSection() {
                   className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end pointer-events-none"
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="text-sm font-mono text-zinc-300">
+                    <span className="font-eyebrow text-sm text-[#c0caff]">
                       {event.date}
                     </span>
                   </div>
-                  <h3 className="text-4xl md:text-5xl font-bold text-white tracking-tight drop-shadow-md whitespace-nowrap">
+                  <h3 className="font-display text-4xl md:text-5xl font-bold text-white tracking-tight drop-shadow-md whitespace-nowrap">
                     {event.title}
                   </h3>
                 </motion.div>

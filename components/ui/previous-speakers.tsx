@@ -48,11 +48,11 @@ const Carousel_003 = ({
   }
 
   .swiper-pagination-bullet {
-    background-color: #fff !important;
+    background-color: #4d6eff !important;
     opacity: 0.3;
   }
   .swiper-pagination-bullet-active {
-    background-color: #fff !important;
+    background-color: #1400ff !important;
     opacity: 1;
   }
 `;
@@ -119,20 +119,20 @@ const Carousel_003 = ({
                 src={image.src}
                 alt={image.alt}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#03061a] via-[#03061a]/50 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end">
-                <h3 className="text-2xl font-bold text-white mb-1">{image.name}</h3>
-                <p className="text-sm font-mono text-zinc-400">{image.role}</p>
+                <h3 className="text-2xl font-bold text-white mb-1 font-display">{image.name}</h3>
+                <p className="text-sm font-mono" style={{ color: "#7888cc" }}>{image.role}</p>
               </div>
             </SwiperSlide>
           ))}
           {showNavigation && (
             <div>
               <div className="swiper-button-next after:hidden">
-                <ChevronRightIcon className="h-8 w-8 text-white drop-shadow-lg" />
+                <ChevronRightIcon className="h-8 w-8 drop-shadow-lg" style={{ color: "#4d6eff" }} />
               </div>
               <div className="swiper-button-prev after:hidden">
-                <ChevronLeftIcon className="h-8 w-8 text-white drop-shadow-lg" />
+                <ChevronLeftIcon className="h-8 w-8 drop-shadow-lg" style={{ color: "#4d6eff" }} />
               </div>
             </div>
           )}
@@ -189,10 +189,18 @@ export function PreviousSpeakers() {
   ];
 
   return (
-    <section className="relative w-full bg-[#080808] overflow-hidden py-32 border-t border-white/5">
+    <section
+      id="speakers"
+      className="relative w-full overflow-hidden py-32 border-t"
+      style={{ background: "rgba(5,8,28,0.95)", borderColor: "rgba(20,0,255,0.15)" }}
+    >
       <div className="container mx-auto px-6 lg:px-8 max-w-7xl mb-16 text-center">
-        <h2 className="text-xs font-semibold tracking-[0.2em] text-zinc-500 uppercase mb-4">Insights From</h2>
-        <h3 className="text-4xl md:text-5xl font-bold text-white tracking-tight">Previous Speakers</h3>
+        <h2 className="text-xs font-mono font-semibold tracking-[0.2em] uppercase mb-4" style={{ color: "#7888cc" }}>
+          Past Edition
+        </h2>
+        <h3 className="text-4xl md:text-5xl font-bold tracking-tight font-display">
+          Previous Speakers
+        </h3>
       </div>
 
       <div className="w-full">
