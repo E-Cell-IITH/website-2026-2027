@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 
 export function SponsorsSection() {
   const sponsors = [
-    { name: "Amazon", size: "text-2xl md:text-5xl", top: "15%", left: "20%" },
-    { name: "UnStop", size: "text-3xl md:text-6xl", top: "20%", left: "80%" },
+    { name: "Amazon", size: "text-3xl md:text-6xl", top: "20%", left: "80%" },
+    { name: "UnStop", size: "text-xl md:text-4xl", top: "78%", left: "78%" },
     { name: "Uber", size: "text-xl md:text-4xl", top: "35%", left: "50%" },
     { name: "Henry Harvin", size: "text-lg md:text-3xl", top: "50%", left: "15%" },
     { name: "ExFinity", size: "text-2xl md:text-4xl", top: "55%", left: "85%" },
@@ -13,7 +13,7 @@ export function SponsorsSection() {
     // { name: "KLEINER PERKINS", size: "text-lg md:text-2xl", top: "75%", left: "80%" },
     { name: "Stumagz", size: "text-xl md:text-4xl", top: "85%", left: "15%" },
     { name: "AglaSen", size: "text-xl md:text-4xl", top: "90%", left: "65%" },
-    { name: "Bleep", size: "text-2xl md:text-4xl", top: "78%", left: "78%" },
+    { name: "Bleep", size: "text-4xl md:text-7xl", top: "15%", left: "20%" },
   ];
 
   return (
