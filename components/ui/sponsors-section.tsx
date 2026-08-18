@@ -13,6 +13,7 @@ export function SponsorsSection() {
     // { name: "KLEINER PERKINS", size: "text-lg md:text-2xl", top: "75%", left: "80%" },
     { name: "Stumagz", size: "text-xl md:text-4xl", top: "85%", left: "15%" },
     { name: "AglaSen", size: "text-xl md:text-4xl", top: "90%", left: "65%" },
+    { name: "Bleep", size: "text-2xl md:text-4xl", top: "78%", left: "78%" },
   ];
 
   return (
