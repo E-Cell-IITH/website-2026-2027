@@ -1,52 +1,195 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 export function SponsorsSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
   const sponsors = [
-    { name: "Amazon", size: "text-2xl md:text-5xl", top: "15%", left: "20%" },
-    { name: "UnStop", size: "text-3xl md:text-6xl", top: "20%", left: "80%" },
-    { name: "Uber", size: "text-xl md:text-4xl", top: "35%", left: "50%" },
-    { name: "Henry Harvin", size: "text-lg md:text-3xl", top: "50%", left: "15%" },
-    { name: "ExFinity", size: "text-2xl md:text-4xl", top: "55%", left: "85%" },
-    { name: "YHills", size: "text-3xl md:text-5xl", top: "70%", left: "45%" },
-    // { name: "KLEINER PERKINS", size: "text-lg md:text-2xl", top: "75%", left: "80%" },
-    { name: "Stumagz", size: "text-xl md:text-4xl", top: "85%", left: "15%" },
-    { name: "AglaSen", size: "text-xl md:text-4xl", top: "90%", left: "65%" },
+    {
+      name: "Amazon",
+      logo: "/sponsors/amazon.svg",
+    },
+    {
+      name: "UnStop",
+      logo: "/sponsors/unstop.svg",
+    },
+    {
+      name: "Uber",
+      logo: "/sponsors/uber.svg",
+    },
+    {
+      name: "Henry Harvin",
+      logo: "/sponsors/henry-harvin.svg",
+    },
+    {
+      name: "ExFinity",
+      logo: "/sponsors/exfinity.svg",
+    },
+    {
+      name: "Bleep",
+      logo: "/sponsors/bleep.png",
+    },
   ];
 
+  /*
+   * Track how far the sponsor section has entered
+   * the viewport.
+   *
+   * When the section enters:
+   * blur = 12px
+   * opacity = 0.25
+   *
+   * When the section is fully revealed:
+   * blur = 0px
+   * opacity = 1
+   */
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 90%", "start 30%"],
+  });
+
+  const blur = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [12, 0]
+  );
+
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0.25, 1]
+  );
+
+  const headingOpacity = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0.4, 1]
+  );
+
   return (
-    <section className="relative w-full bg-transparent overflow-hidden py-24 md:py-32 border-t border-white/5">
-      <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
+    <section
+      ref={sectionRef}
+      className="
+        relative
+        w-full
+        overflow-hidden
+        border-t
+        border-white/5
+        bg-[#111111]
+        py-32
+        md:py-40
+      "
+    >
+      {/* Subtle ambient glow */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-1/2
+          h-[500px]
+          w-[700px]
+          -translate-x-1/2
+          -translate-y-1/2
+          rounded-full
+          bg-white/[0.015]
+          blur-[140px]
+        "
+      />
+
+      <div className="relative mx-auto max-w-5xl px-6">
 
         {/* Header */}
-        <div className="text-center mb-16 md:mb-24">
-          <h2 className="text-sm md:text-base font-semibold tracking-[0.4em] text-zinc-500 uppercase">
-            Backed By
+        <motion.div
+          style={{ opacity: headingOpacity }}
+          className="text-center"
+        >
+          <h2
+            className="
+              text-2xl
+              font-medium
+              tracking-tight
+              text-white/70
+              md:text-[29px]
+            "
+          >
+            Trusted by modern operators across industries.
           </h2>
-        </div>
 
-        {/* Scattered Logos Canvas */}
-        <div className="relative w-full min-h-[600px] md:min-h-[700px]">
-          {sponsors.map((sponsor, idx) => (
+          <p
+            className="
+              mt-2
+              text-xl
+              tracking-tight
+              text-white/25
+              md:text-[27px]
+            "
+          >
+            From pilot to scale without chaos.
+          </p>
+        </motion.div>
+
+        {/* Sponsor Grid */}
+        <motion.div
+          style={{
+            filter: useTransform(
+              blur,
+              (value) => `blur(${value}px)`
+            ),
+            opacity,
+          }}
+          className="
+            mx-auto
+            mt-24
+            grid
+            max-w-[700px]
+            grid-cols-3
+            items-center
+            justify-items-center
+            gap-x-12
+            gap-y-16
+            md:gap-x-20
+            md:gap-y-20
+          "
+        >
+          {sponsors.map((sponsor) => (
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.8, delay: idx * 0.1, ease: "easeOut" }}
-              className="absolute -translate-x-1/2 -translate-y-1/2 w-max"
-              style={{ top: sponsor.top, left: sponsor.left }}
+              key={sponsor.name}
+              whileHover={{
+                scale: 1.05,
+                opacity: 1,
+              }}
+              transition={{
+                duration: 0.25,
+              }}
+              className="
+                flex
+                h-16
+                w-full
+                items-center
+                justify-center
+              "
             >
-              <div
-                className={`font-black tracking-tighter uppercase text-white opacity-30 hover:opacity-100 transition-opacity duration-300 cursor-default select-none ${sponsor.size}`}
-              >
-                {sponsor.name}
-              </div>
+              <img
+                src={sponsor.logo}
+                alt={`${sponsor.name} logo`}
+                className="
+                  max-h-12
+                  max-w-[150px]
+                  object-contain
+                  brightness-0
+                  invert
+                  opacity-70
+                  transition-opacity
+                  duration-300
+                  hover:opacity-100
+                "
+              />
             </motion.div>
           ))}
-        </div>
-
+        </motion.div>
       </div>
     </section>
   );
