@@ -13,27 +13,19 @@ function DomainMemberRow({ member }: { member: { name: string; img: string; emai
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Avatar with icons popping out top-right */}
       <div className="relative flex-shrink-0">
         <div className="relative w-24 h-24 rounded-[3px] overflow-hidden bg-white/[0.04]">
-          <MemberPhoto src={member.img} name={member.name} fill size={96} priority={false} />
+          <MemberPhoto src={member.img} name={member.name} fill size={96} priority={false} sizes="96px" />
         </div>
 
-        {/* Icons appear top-right of avatar */}
         <div className="absolute -top-2 -right-2 flex flex-col gap-1">
           {member.email && (
-            <a
-              href={`mailto:${member.email}`}
-              className="w-6 h-6 rounded-full bg-[#111] border border-white/20 flex items-center justify-center hover:bg-[#e040a0] hover:border-[#e040a0] transition-all duration-200 shadow-lg"
-              title="Email"
-              style={{
-                opacity: hovered ? 1 : 0,
-                transform: hovered ? "scale(1) translateY(0)" : "scale(0.5) translateY(6px)",
-                transition: "opacity 0.2s ease, transform 0.2s ease",
-                transitionDelay: hovered ? "0ms" : "0ms",
-                pointerEvents: hovered ? "auto" : "none",
-              }}
-            >
+            <a href={`mailto:${member.email}`} className="w-6 h-6 rounded-full bg-[#111] border border-white/20 flex items-center justify-center hover:bg-[#e040a0] hover:border-[#e040a0] transition-all duration-200 shadow-lg" title="Email" style={{
+              opacity: hovered ? 1 : 0,
+              transform: hovered ? "scale(1) translateY(0)" : "scale(0.5) translateY(6px)",
+              transition: "opacity 0.2s ease, transform 0.2s ease",
+              pointerEvents: hovered ? "auto" : "none",
+            }}>
               <svg width="10" height="10" viewBox="0 0 20 20" fill="white">
                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
@@ -41,20 +33,13 @@ function DomainMemberRow({ member }: { member: { name: string; img: string; emai
             </a>
           )}
           {member.linkedin && (
-            <a
-              href={member.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-6 h-6 rounded-full bg-[#111] border border-white/20 flex items-center justify-center hover:bg-[#0a66c2] hover:border-[#0a66c2] transition-all duration-200 shadow-lg"
-              title="LinkedIn"
-              style={{
-                opacity: hovered ? 1 : 0,
-                transform: hovered ? "scale(1) translateY(0)" : "scale(0.5) translateY(6px)",
-                transition: "opacity 0.2s ease, transform 0.2s ease",
-                transitionDelay: hovered ? "60ms" : "0ms",
-                pointerEvents: hovered ? "auto" : "none",
-              }}
-            >
+            <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="w-6 h-6 rounded-full bg-[#111] border border-white/20 flex items-center justify-center hover:bg-[#0a66c2] hover:border-[#0a66c2] transition-all duration-200 shadow-lg" title="LinkedIn" style={{
+              opacity: hovered ? 1 : 0,
+              transform: hovered ? "scale(1) translateY(0)" : "scale(0.5) translateY(6px)",
+              transition: "opacity 0.2s ease, transform 0.2s ease",
+              transitionDelay: hovered ? "60ms" : "0ms",
+              pointerEvents: hovered ? "auto" : "none",
+            }}>
               <svg width="10" height="10" viewBox="0 0 24 24" fill="white">
                 <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
                 <circle cx="4" cy="4" r="2" />
@@ -64,7 +49,6 @@ function DomainMemberRow({ member }: { member: { name: string; img: string; emai
         </div>
       </div>
 
-      {/* Name */}
       <div className="flex-1 min-w-0">
         <p
           className="text-[16px] font-medium leading-snug transition-colors duration-200"
@@ -85,7 +69,7 @@ export default function DomainHeads() {
       </p>
       <h2
         className="text-white font-bold tracking-tight mb-14"
-        style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)", fontFamily: "'Playfair Display', serif" }}
+        style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)", fontFamily: "var(--font-playfair), serif" }}
       >
         The people
         <br />

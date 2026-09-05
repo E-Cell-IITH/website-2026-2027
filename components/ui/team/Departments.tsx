@@ -26,7 +26,6 @@ function MemberCard({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Avatar with LinkedIn popping out top-right */}
       <div className="relative">
         <div
           className="relative rounded-full overflow-hidden bg-white/[0.04] border transition-colors duration-200"
@@ -36,24 +35,22 @@ function MemberCard({
             borderColor: hovered ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.06)",
           }}
         >
-          <MemberPhoto src={img} name={name} fill size={photoSize} priority={priority} />
+          <MemberPhoto
+            src={img}
+            name={name}
+            fill
+            size={photoSize}
+            priority={priority}
+            sizes="(max-width: 640px) 96px, 116px"
+          />
         </div>
 
-        {/* LinkedIn icon pops out top-right on hover */}
-        <a
-          href={linkedin ?? "#"}
-          target={linkedin ? "_blank" : undefined}
-          rel={linkedin ? "noopener noreferrer" : undefined}
-          onClick={(e) => e.stopPropagation()}
-          className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-[#111] border border-white/20 flex items-center justify-center hover:bg-[#0a66c2] hover:border-[#0a66c2] shadow-lg"
-          title="LinkedIn"
-          style={{
+        <a href={linkedin ?? "#"} target={linkedin ? "_blank" : undefined} rel={linkedin ? "noopener noreferrer" : undefined} onClick={(e) => e.stopPropagation()} className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-[#111] border border-white/20 flex items-center justify-center hover:bg-[#0a66c2] hover:border-[#0a66c2] shadow-lg" title="LinkedIn" style={{
             opacity: hovered ? 1 : 0,
             transform: hovered ? "scale(1) translateY(0)" : "scale(0.5) translateY(6px)",
             transition: "opacity 0.2s ease, transform 0.2s ease",
             pointerEvents: hovered ? "auto" : "none",
-          }}
-        >
+          }}>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
             <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
             <circle cx="4" cy="4" r="2" />
@@ -61,7 +58,6 @@ function MemberCard({
         </a>
       </div>
 
-      {/* Name */}
       <span
         className="text-[13px] font-medium text-center leading-snug max-w-[124px] transition-colors duration-200"
         style={{ color: hovered ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.55)" }}
@@ -75,7 +71,7 @@ function MemberCard({
 export default function Departments() {
   return (
     <div className="border-t border-white/[0.06]">
-      {DEPARTMENTS.map((dept, i) => (
+      {DEPARTMENTS.map((dept) => (
         <section
           key={dept.name}
           className="flex flex-col lg:flex-row border-b border-white/[0.06]"
@@ -83,7 +79,7 @@ export default function Departments() {
           <div className="lg:w-[320px] xl:w-[380px] flex-shrink-0 px-6 md:px-12 lg:px-16 py-16 lg:border-r border-white/[0.06] lg:sticky lg:top-20 self-start">
             <h3
               className="text-white font-bold tracking-tight leading-[1.1] mb-5"
-              style={{ fontSize: "clamp(1.7rem, 2.8vw, 2.4rem)", fontFamily: "'Playfair Display', serif" }}
+              style={{ fontSize: "clamp(1.7rem, 2.8vw, 2.4rem)", fontFamily: "var(--font-playfair), serif" }}
             >
               {dept.name}
             </h3>
