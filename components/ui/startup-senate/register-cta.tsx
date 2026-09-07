@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useRegistration } from "@/contexts/registration-context";
 import { RegistrationForm } from "./registration-form";
-import { submitStartupSenateRegistration } from "@/lib/startup-senate";
 
 const ctaClass =
   "h-14 rounded-full bg-orange-500 px-9 text-base text-black hover:bg-orange-400";
@@ -60,22 +59,13 @@ export function RegisterCTA({ className = "" }: { className?: string }) {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-
-  try {
-    await submitStartupSenateRegistration(formData);
-
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Google Sheets / Apps Script submission wires in here later.
+    console.log("Registration submitted:", formData);
     resetForm();
     setOpen(false);
-
-    // Show success message
-  } catch (error) {
-    console.error("Registration submission failed:", error);
-
-    // Show error message
-  }
-};
+  };
 
   if (!isDesktop) {
     return (

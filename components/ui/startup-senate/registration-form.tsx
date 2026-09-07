@@ -17,28 +17,14 @@ const sanitizePhone = (value: string) => value.replace(/\D/g, "").slice(0, 10);
 
 interface RegistrationFormProps {
   formData: RegistrationFormData;
-
-  onFieldChange: (
-    field: keyof RegistrationFormData,
-    value: string
-  ) => void;
-
+  onFieldChange: (field: keyof RegistrationFormData, value: string) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-
-  isSubmitting: boolean;
-
-  submissionStatus: "idle" | "success" | "error";
-
-  submissionError: string;
 }
 
 export function RegistrationForm({
   formData,
   onFieldChange,
   onSubmit,
-  isSubmitting,
-  submissionStatus,
-  submissionError,
 }: RegistrationFormProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-6">
@@ -203,53 +189,13 @@ export function RegistrationForm({
           </div>
         </div>
       </div>
-      {submissionStatus === "success" && (
-    <div
-        role="status"
-        className="rounded-lg border border-green-500/30 bg-green-500/10 p-4 text-sm text-green-300"
-    >
-        <p className="font-medium">
-        Registration successful!
-        </p>
 
-        <p className="mt-1 text-green-300/80">
-        Your application has been submitted successfully and is
-        currently under review. A confirmation email has been sent
-        to your registered email address.
-        </p>
-    </div>
-    )}
-
-    {submissionStatus === "error" && (
-    <div
-        role="alert"
-        className="rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-300"
-    >
-        <p className="font-medium">
-        Registration could not be submitted.
-        </p>
-
-        <p className="mt-1 text-red-300/80">
-        {submissionError ||
-            "Something went wrong. Please try again."}
-        </p>
-    </div>
-    )}
-
-    <button
+      <button
         type="submit"
-        disabled={isSubmitting}
-        className={cn(
-            "w-full rounded-full py-3 text-base font-medium text-black transition-colors",
-            isSubmitting
-            ? "cursor-not-allowed bg-orange-500/50"
-            : "bg-orange-500 hover:bg-orange-400"
-        )}
-        >
-        {isSubmitting
-            ? "Submitting your registration..."
-            : "Submit registration"}
-    </button>
+        className="w-full rounded-full bg-orange-500 py-3 text-base font-medium text-black transition-colors hover:bg-orange-400"
+      >
+        Submit registration
+      </button>
     </form>
   );
 }
