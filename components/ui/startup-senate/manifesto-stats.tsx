@@ -2,7 +2,7 @@ export function ManifestoStats() {
   return (
     <section
       id="about"
-      className="relative w-full overflow-hidden bg-transparent py-16 md:py-20"
+      className="relative w-full overflow-hidden bg-[#0a0a0a] py-16 text-white md:py-20"
     >
       <div className="container mx-auto max-w-5xl px-6 lg:px-8">
         {/* Part 1: Manifesto */}
