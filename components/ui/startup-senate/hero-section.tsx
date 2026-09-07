@@ -1,7 +1,6 @@
 import { GLSLHills } from "@/components/ui/glsl-hills";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { RegisterCTA } from "./register-cta";
 
 export default function StartupSenateHero() {
   return (
@@ -14,6 +13,7 @@ export default function StartupSenateHero() {
 
         <div className="absolute z-10 flex flex-col items-center space-y-8 px-6 text-center">
           <h1 className="whitespace-pre-wrap font-serif text-5xl italic tracking-tight text-white sm:text-6xl md:text-8xl">
+            <span className="italic text-4xl sm:text-5xl md:text-7xl font-thin">Where Ideas Meet Opportunities<br/></span>
             Startup Senate
           </h1>
 
@@ -28,7 +28,15 @@ export default function StartupSenateHero() {
               About the event
             </a>
 
-            <RegisterCTA />
+            <a
+              href="#register"
+              className={cn(
+                buttonVariants({ size: "lg" }),
+                "h-14 rounded-full bg-orange-500 px-9 text-base text-black hover:bg-orange-400"
+              )}
+            >
+              Apply now
+            </a>
           </div>
         </div>
       </section>

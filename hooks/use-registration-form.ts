@@ -11,7 +11,8 @@ export type RegistrationFormData = {
   schoolAddress: string;
   motherName: string;
   fatherName: string;
-  parentPhone: string;
+  motherPhone: string;
+  fatherPhone: string;
   parentEmail: string;
   utrNumber: string;
 };
@@ -27,7 +28,8 @@ const emptyForm: RegistrationFormData = {
   schoolAddress: "",
   motherName: "",
   fatherName: "",
-  parentPhone: "",
+  motherPhone: "",
+  fatherPhone: "",
   parentEmail: "",
   utrNumber: "",
 };

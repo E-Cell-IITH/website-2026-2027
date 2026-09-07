@@ -9,6 +9,7 @@ export function RegistrationSection() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // Google Sheets / Apps Script submission wires in here later.
     console.log("Registration submitted:", formData);
     resetForm();
   };
@@ -16,13 +17,13 @@ export function RegistrationSection() {
   return (
     <section
       id="register"
-      className="w-full bg-[#0a0a0a] px-6 py-16 text-white md:hidden"
+      className="w-full bg-[#0a0a0a] px-6 py-16 text-white md:py-24"
     >
-      <div className="mx-auto mb-8 max-w-lg space-y-2 text-center">
+      <div className="mx-auto mb-8 max-w-lg space-y-2 text-center md:mb-12">
         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
           Register
         </span>
-        <h2 className="font-serif text-3xl italic tracking-tight text-white">
+        <h2 className="font-serif text-3xl italic tracking-tight text-white md:text-5xl">
           Apply for Startup Senate
         </h2>
       </div>

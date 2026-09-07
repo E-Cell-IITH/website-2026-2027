@@ -11,6 +11,10 @@ const AMOUNT_BASE = 1200;
 const GST_RATE = 0.18;
 const AMOUNT_TOTAL = Math.round(AMOUNT_BASE * (1 + GST_RATE));
 
+// Strips anything non-numeric and caps length, so the field can never
+// hold more than a 10-digit number even before the user submits.
+const sanitizePhone = (value: string) => value.replace(/\D/g, "").slice(0, 10);
+
 interface RegistrationFormProps {
   formData: RegistrationFormData;
   onFieldChange: (field: keyof RegistrationFormData, value: string) => void;
@@ -40,8 +44,14 @@ export function RegistrationForm({
             id="studentPhone"
             type="tel"
             required
+            inputMode="numeric"
+            pattern="\d{10}"
+            maxLength={10}
+            title="Enter a 10-digit phone number"
             value={formData.studentPhone}
-            onChange={(e) => onFieldChange("studentPhone", e.target.value)}
+            onChange={(e) =>
+              onFieldChange("studentPhone", sanitizePhone(e.target.value))
+            }
             placeholder="10-digit mobile number"
           />
         </Field>
@@ -97,6 +107,22 @@ export function RegistrationForm({
           />
         </Field>
 
+        <Field label="Mother's phone number" id="motherPhone">
+          <Input
+            id="motherPhone"
+            type="tel"
+            required
+            inputMode="numeric"
+            pattern="\d{10}"
+            maxLength={10}
+            title="Enter a 10-digit phone number"
+            value={formData.motherPhone}
+            onChange={(e) =>
+              onFieldChange("motherPhone", sanitizePhone(e.target.value))
+            }
+          />
+        </Field>
+
         <Field label="Father's name" id="fatherName">
           <Input
             id="fatherName"
@@ -106,17 +132,23 @@ export function RegistrationForm({
           />
         </Field>
 
-        <Field label="Parent's phone number" id="parentPhone">
+        <Field label="Father's phone number" id="fatherPhone">
           <Input
-            id="parentPhone"
+            id="fatherPhone"
             type="tel"
             required
-            value={formData.parentPhone}
-            onChange={(e) => onFieldChange("parentPhone", e.target.value)}
+            inputMode="numeric"
+            pattern="\d{10}"
+            maxLength={10}
+            title="Enter a 10-digit phone number"
+            value={formData.fatherPhone}
+            onChange={(e) =>
+              onFieldChange("fatherPhone", sanitizePhone(e.target.value))
+            }
           />
         </Field>
 
-        <Field label="Parent's email" id="parentEmail">
+        <Field label="Parent's email" id="parentEmail" className="sm:col-span-2">
           <Input
             id="parentEmail"
             type="email"
@@ -148,7 +180,11 @@ export function RegistrationForm({
                 value={formData.utrNumber}
                 onChange={(e) => onFieldChange("utrNumber", e.target.value)}
                 placeholder="12-digit UTR"
-              />
+                maxLength={12}
+                minLength={12}
+                inputMode="numeric"
+                pattern="[0-9]{12}"
+            />
             </Field>
           </div>
         </div>
