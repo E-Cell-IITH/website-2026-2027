@@ -22,7 +22,7 @@ export default function StartupSenateHero() {
               href="#about"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "h-14 rounded-full border-white/20 bg-transparent px-9 text-base text-white hover:bg-white/10 hover:text-white"
+                "h-14 rounded-full border-white/20 bg-transparent px-9 text-base text-white hover:bg-black/10 hover:text-white"
               )}
             >
               About the event
@@ -30,7 +30,7 @@ export default function StartupSenateHero() {
 
             <a
               href="#register"
-              className={cn(
+              className={cn(  
                 buttonVariants({ size: "lg" }),
                 "h-14 rounded-full bg-orange-500 px-9 text-base text-black hover:bg-orange-400"
               )}

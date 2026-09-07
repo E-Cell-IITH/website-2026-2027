@@ -1,17 +1,61 @@
 "use client";
 
-import type { FormEvent } from "react";
+import { useState, type FormEvent } from "react";
+
 import { useRegistration } from "@/contexts/registration-context";
+import { submitStartupSenateRegistration } from "@/lib/startup-senate";
+
 import { RegistrationForm } from "./registration-form";
 
 export function RegistrationSection() {
-  const { formData, updateField, resetForm } = useRegistration();
+  const {
+    formData,
+    updateField,
+    resetForm,
+  } = useRegistration();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const [isSubmitting, setIsSubmitting] =
+    useState(false);
+
+  const [submissionStatus, setSubmissionStatus] =
+    useState<"idle" | "success" | "error">("idle");
+
+  const [submissionError, setSubmissionError] =
+    useState("");
+
+  const handleSubmit = async (
+    e: FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
-    // Google Sheets / Apps Script submission wires in here later.
-    console.log("Registration submitted:", formData);
-    resetForm();
+
+    setIsSubmitting(true);
+    setSubmissionStatus("idle");
+    setSubmissionError("");
+
+    try {
+      await submitStartupSenateRegistration(formData);
+
+      resetForm();
+
+      setSubmissionStatus("success");
+    } catch (error) {
+      console.error(
+        "Registration submission failed:",
+        error
+      );
+
+      setSubmissionStatus("error");
+
+      if (error instanceof Error) {
+        setSubmissionError(error.message);
+      } else {
+        setSubmissionError(
+          "We couldn't submit your registration. Please try again."
+        );
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -23,6 +67,7 @@ export function RegistrationSection() {
         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
           Register
         </span>
+
         <h2 className="font-serif text-3xl italic tracking-tight text-white md:text-5xl">
           Apply for Startup Senate
         </h2>
@@ -33,6 +78,9 @@ export function RegistrationSection() {
           formData={formData}
           onFieldChange={updateField}
           onSubmit={handleSubmit}
+          isSubmitting={isSubmitting}
+          submissionStatus={submissionStatus}
+          submissionError={submissionError}
         />
       </div>
     </section>

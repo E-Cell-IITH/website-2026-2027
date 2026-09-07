@@ -2,10 +2,14 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useRegistration } from "@/contexts/registration-context";
+
+import { submitStartupSenateRegistration } from "@/lib/startup-senate";
+
 import { RegistrationForm } from "./registration-form";
 
 const ctaClass =
@@ -22,12 +26,22 @@ const morphTransition = {
 
 export function RegisterCTA({ className = "" }: { className?: string }) {
   const isDesktop = useMediaQuery("(min-width: 768px)");
+
   const [open, setOpen] = useState(false);
+
   const { formData, updateField, resetForm } = useRegistration();
 
+  // Submission state
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [submissionStatus, setSubmissionStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+
+  const [submissionError, setSubmissionError] = useState("");
+
   // Lock the page behind the modal without losing scroll position or
-  // causing a layout jump — plain `overflow: hidden` alone still lets
-  // touch/scroll-wheel events reach the page underneath on some browsers.
+  // causing a layout jump.
   useEffect(() => {
     if (!open) return;
 
@@ -44,26 +58,80 @@ export function RegisterCTA({ className = "" }: { className?: string }) {
       body.top = "";
       body.left = "";
       body.right = "";
+
       window.scrollTo(0, scrollY);
     };
   }, [open]);
 
-  // Close on Escape — Radix's Dialog gave us this for free, so it needs
-  // to be added back now that the modal is hand-rolled.
+  // Close on Escape.
   useEffect(() => {
     if (!open) return;
+
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+      }
     };
+
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
   }, [open]);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Google Sheets / Apps Script submission wires in here later.
-    console.log("Registration submitted:", formData);
-    resetForm();
+
+    // Prevent duplicate submissions
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setSubmissionStatus("idle");
+    setSubmissionError("");
+
+    try {
+      await submitStartupSenateRegistration(formData);
+
+      // Only clear the form after successful submission.
+      resetForm();
+
+      setSubmissionStatus("success");
+
+      // IMPORTANT:
+      // Do NOT close the modal here.
+      // The user needs to see the success message.
+    } catch (error) {
+      console.error("Registration submission failed:", error);
+
+      setSubmissionStatus("error");
+
+      if (error instanceof Error) {
+        setSubmissionError(error.message);
+      } else {
+        setSubmissionError(
+          "We couldn't submit your registration. Please try again."
+        );
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleOpen = () => {
+    // Reset any previous submission message when opening
+    // the registration modal again.
+    setSubmissionStatus("idle");
+    setSubmissionError("");
+
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    // Don't allow the modal to be closed while submission
+    // is actively happening.
+    if (isSubmitting) return;
+
     setOpen(false);
   };
 
@@ -71,7 +139,11 @@ export function RegisterCTA({ className = "" }: { className?: string }) {
     return (
       <a
         href="#register"
-        className={cn(buttonVariants({ size: "lg" }), ctaClass, className)}
+        className={cn(
+          buttonVariants({ size: "lg" }),
+          ctaClass,
+          className
+        )}
       >
         Apply now
       </a>
@@ -85,9 +157,13 @@ export function RegisterCTA({ className = "" }: { className?: string }) {
           key="apply-button"
           layoutId="register-cta-shape"
           type="button"
-          onClick={() => setOpen(true)}
+          onClick={handleOpen}
           transition={morphTransition}
-          className={cn(buttonVariants({ size: "lg" }), ctaClass, className)}
+          className={cn(
+            buttonVariants({ size: "lg" }),
+            ctaClass,
+            className
+          )}
         >
           Apply now
         </motion.button>
@@ -99,7 +175,7 @@ export function RegisterCTA({ className = "" }: { className?: string }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          onClick={() => setOpen(false)}
+          onClick={handleClose}
         >
           <motion.div
             layoutId="register-cta-shape"
@@ -122,9 +198,10 @@ export function RegisterCTA({ className = "" }: { className?: string }) {
                 >
                   Register for Startup Senate
                 </h2>
+
                 <p className="text-sm text-zinc-400">
-                  Your progress is saved automatically — close this anytime
-                  and pick up where you left off.
+                  Your progress is saved automatically — close this
+                  anytime and pick up where you left off.
                 </p>
               </div>
 
@@ -132,6 +209,9 @@ export function RegisterCTA({ className = "" }: { className?: string }) {
                 formData={formData}
                 onFieldChange={updateField}
                 onSubmit={handleSubmit}
+                isSubmitting={isSubmitting}
+                submissionStatus={submissionStatus}
+                submissionError={submissionError}
               />
             </motion.div>
           </motion.div>
