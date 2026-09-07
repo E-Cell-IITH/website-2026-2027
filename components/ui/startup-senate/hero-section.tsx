@@ -13,9 +13,17 @@ export default function StartupSenateHero() {
 
         <div className="absolute z-10 flex flex-col items-center space-y-8 px-6 text-center">
           <h1 className="whitespace-pre-wrap font-serif text-5xl italic tracking-tight text-white sm:text-6xl md:text-8xl">
-            <span className="italic text-4xl sm:text-5xl md:text-7xl font-thin">Where Ideas Meet Opportunities<br/></span>
+            <span className="italic text-4xl sm:text-5xl md:text-7xl font-thin">
+              Where Ideas Meet Opportunities
+              <br />
+            </span>
             Startup Senate
           </h1>
+
+          {/* Event Date */}
+          <p className="-mt-4 font-serif text-xl font-bold italic tracking-wide text-white/80 sm:text-xl">
+            10–12th October
+          </p>
 
           <div className="pointer-events-auto flex flex-col items-center gap-4 sm:flex-row">
             <a
@@ -30,7 +38,7 @@ export default function StartupSenateHero() {
 
             <a
               href="#register"
-              className={cn(  
+              className={cn(
                 buttonVariants({ size: "lg" }),
                 "h-14 rounded-full bg-orange-500 px-9 text-base text-black hover:bg-orange-400"
               )}
