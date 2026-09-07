@@ -2,7 +2,7 @@ export function ManifestoStats() {
   return (
     <section
       id="about"
-      className="relative w-full overflow-hidden bg-[#0a0a0a] py-16 text-white md:py-20"
+      className="relative w-full overflow-hidden bg-[#0a0a0a] py-16 md:py-20"
     >
       <div className="container mx-auto max-w-5xl px-6 lg:px-8">
         {/* Part 1: Manifesto */}
@@ -10,9 +10,11 @@ export function ManifestoStats() {
           <div className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
             About The Event
           </div>
+
           <h2 className="font-serif text-4xl italic tracking-tight text-white md:text-6xl">
             Step into the boardroom
           </h2>
+
           <p className="max-w-3xl text-base leading-relaxed text-zinc-400 md:text-lg">
             The Startup Senate puts you in the founder&apos;s seat for three
             days. Working with your committee as co-founders, you&apos;ll

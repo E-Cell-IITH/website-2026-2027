@@ -8,25 +8,20 @@ import { submitStartupSenateRegistration } from "@/lib/startup-senate";
 import { RegistrationForm } from "./registration-form";
 
 export function RegistrationSection() {
-  const {
-    formData,
-    updateField,
-    resetForm,
-  } = useRegistration();
+  const { formData, updateField, resetForm } = useRegistration();
 
-  const [isSubmitting, setIsSubmitting] =
-    useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [submissionStatus, setSubmissionStatus] =
-    useState<"idle" | "success" | "error">("idle");
+  const [submissionStatus, setSubmissionStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
 
-  const [submissionError, setSubmissionError] =
-    useState("");
+  const [submissionError, setSubmissionError] = useState("");
 
-  const handleSubmit = async (
-    e: FormEvent<HTMLFormElement>
-  ) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (isSubmitting) return;
 
     setIsSubmitting(true);
     setSubmissionStatus("idle");
@@ -35,14 +30,12 @@ export function RegistrationSection() {
     try {
       await submitStartupSenateRegistration(formData);
 
+      // Clear form only after successful submission.
       resetForm();
 
       setSubmissionStatus("success");
     } catch (error) {
-      console.error(
-        "Registration submission failed:",
-        error
-      );
+      console.error("Registration submission failed:", error);
 
       setSubmissionStatus("error");
 
