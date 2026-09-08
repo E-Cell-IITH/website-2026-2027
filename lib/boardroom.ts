@@ -1,5 +1,5 @@
 const GOOGLE_APPS_SCRIPT_URL =
-  "YOUR_BOARDROOM_GOOGLE_APPS_SCRIPT_WEB_APP_URL";
+  "https://script.google.com/macros/s/AKfycbwThfaZpnyzc6KmnWAntIM8_flbLcxQO7blx7pWCk4qniAu5J0M_dYk1P6203it2gU/exec";
 
 export async function submitBoardroomRegistration(
   formData: Record<string, string>
