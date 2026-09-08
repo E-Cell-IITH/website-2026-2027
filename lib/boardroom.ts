@@ -5,13 +5,19 @@ export async function submitBoardroomRegistration(
   formData: Record<string, string>
 ) {
   try {
-    const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-      },
-      body: JSON.stringify(formData),
-    });
+    const response = await fetch(
+      GOOGLE_APPS_SCRIPT_URL,
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "text/plain;charset=utf-8",
+        },
+
+        body: JSON.stringify(formData),
+      }
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -23,13 +29,17 @@ export async function submitBoardroomRegistration(
 
     if (!result.success) {
       throw new Error(
-        result.message || "Registration submission failed."
+        result.message ||
+          "Registration submission failed."
       );
     }
 
     return result;
   } catch (error) {
-    console.error("Boardroom submission error:", error);
+    console.error(
+      "Boardroom registration failed:",
+      error
+    );
 
     if (error instanceof Error) {
       throw error;

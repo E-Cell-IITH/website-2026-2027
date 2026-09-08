@@ -51,7 +51,7 @@ const Skiper30 = () => {
   }, []);
 
   return (
-    <main className="w-full bg-[#0a0a0a] text-white">
+    <section className="w-full bg-[#0a0a0a] text-white">
       <div className="flex flex-col items-center justify-center gap-3 py-16 text-center md:py-20">
         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
           Gallery
@@ -88,7 +88,7 @@ const Skiper30 = () => {
       </div>
 
       <div className="h-16 md:h-24" />
-    </main>
+    </section>
   );
 };
 

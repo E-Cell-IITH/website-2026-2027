@@ -1,6 +1,9 @@
 "use client";
 
-import type { ChangeEvent, FormEvent } from "react";
+import type {
+  ChangeEvent,
+  FormEvent,
+} from "react";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,23 +13,31 @@ import type { BoardroomRegistrationFormData } from "@/hooks/use-boardroom-regist
 
 interface RegistrationFormProps {
   formData: BoardroomRegistrationFormData;
+
   onFieldChange: (
     field: keyof BoardroomRegistrationFormData,
     value: string
   ) => void;
+
   onSubmit: (
     e: FormEvent<HTMLFormElement>
   ) => void | Promise<void>;
+
   isSubmitting: boolean;
-  submissionStatus: "idle" | "success" | "error";
+
+  submissionStatus:
+    | "idle"
+    | "success"
+    | "error";
+
   submissionError: string;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Section Header                                                             */
-/* -------------------------------------------------------------------------- */
-
-function SectionHeader({ title }: { title: string }) {
+function SectionHeader({
+  title,
+}: {
+  title: string;
+}) {
   return (
     <div className="mb-8">
       <h2 className="text-2xl font-medium tracking-tight text-white md:text-3xl">
@@ -38,20 +49,23 @@ function SectionHeader({ title }: { title: string }) {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/* Input Field                                                                */
-/* -------------------------------------------------------------------------- */
-
 interface FieldProps {
   id: keyof BoardroomRegistrationFormData;
+
   label: string;
+
   value: string;
+
   onChange: (
     field: keyof BoardroomRegistrationFormData,
     value: string
   ) => void;
+
   placeholder?: string;
+
   type?: string;
+
+  required?: boolean;
 }
 
 function Field({
@@ -61,14 +75,21 @@ function Field({
   onChange,
   placeholder,
   type = "text",
+  required = true,
 }: FieldProps) {
   const isPhone =
-    id === "primaryPocPhone" ||
-    id === "secondaryPocPhone";
+    id === "member1Phone" ||
+    id === "member2Phone" ||
+    id === "member3Phone" ||
+    id === "member4Phone" ||
+    id === "member5Phone";
 
   const isEmail =
-    id === "primaryPocEmail" ||
-    id === "secondaryPocEmail";
+    id === "member1Email" ||
+    id === "member2Email" ||
+    id === "member3Email" ||
+    id === "member4Email" ||
+    id === "member5Email";
 
   const isUTR = id === "utrNumber";
 
@@ -77,24 +98,13 @@ function Field({
   ) => {
     let nextValue = e.target.value;
 
-    /* -------------------------------------------------------------- */
-    /* Phone number                                                    */
-    /* -------------------------------------------------------------- */
     if (isPhone) {
-      // Only numbers.
-      // Maximum 10 digits.
-      // NO 6-9 restriction.
       nextValue = nextValue
         .replace(/\D/g, "")
         .slice(0, 10);
     }
 
-    /* -------------------------------------------------------------- */
-    /* UTR number                                                      */
-    /* -------------------------------------------------------------- */
     if (isUTR) {
-      // Only numbers.
-      // Maximum 12 digits.
       nextValue = nextValue
         .replace(/\D/g, "")
         .slice(0, 12);
@@ -132,7 +142,7 @@ function Field({
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
-        required
+        required={required}
         maxLength={
           isPhone
             ? 10
@@ -153,9 +163,84 @@ function Field({
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/* Main Registration Form                                                     */
-/* -------------------------------------------------------------------------- */
+interface TeamMemberFieldsProps {
+  memberNumber: 1 | 2 | 3 | 4 | 5;
+
+  formData: BoardroomRegistrationFormData;
+
+  onFieldChange: (
+    field: keyof BoardroomRegistrationFormData,
+    value: string
+  ) => void;
+
+  required: boolean;
+}
+
+function TeamMemberFields({
+  memberNumber,
+  formData,
+  onFieldChange,
+  required,
+}: TeamMemberFieldsProps) {
+  const nameField =
+    `member${memberNumber}Name` as keyof BoardroomRegistrationFormData;
+
+  const phoneField =
+    `member${memberNumber}Phone` as keyof BoardroomRegistrationFormData;
+
+  const emailField =
+    `member${memberNumber}Email` as keyof BoardroomRegistrationFormData;
+
+  return (
+    <div
+      className={cn(
+        "border-t border-white/10 pt-8",
+        memberNumber === 1 &&
+          "border-t-0 pt-0"
+      )}
+    >
+      <h3 className="mb-6 text-lg font-medium text-white">
+        Member {memberNumber}
+        {memberNumber === 1 && (
+          <span className="ml-2 text-sm font-normal text-zinc-500">
+            Primary Contact
+          </span>
+        )}
+      </h3>
+
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <Field
+          id={nameField}
+          label="Name"
+          value={formData[nameField]}
+          onChange={onFieldChange}
+          placeholder="Full name"
+          required={required}
+        />
+
+        <Field
+          id={phoneField}
+          label="Phone Number"
+          value={formData[phoneField]}
+          onChange={onFieldChange}
+          placeholder="10-digit phone number"
+          type="tel"
+          required={required}
+        />
+
+        <Field
+          id={emailField}
+          label="Email Address"
+          value={formData[emailField]}
+          onChange={onFieldChange}
+          placeholder="you@example.com"
+          type="email"
+          required={required}
+        />
+      </div>
+    </div>
+  );
+}
 
 export function BoardroomRegistrationForm({
   formData,
@@ -165,21 +250,17 @@ export function BoardroomRegistrationForm({
   submissionStatus,
   submissionError,
 }: RegistrationFormProps) {
+  const teamSize =
+    Number(formData.teamSize) || 0;
+
   return (
     <form
       onSubmit={onSubmit}
       className="w-full"
     >
-      {/* ================================================================== */}
-      {/* ONE SINGLE FORM CONTAINER                                         */}
-      {/* ================================================================== */}
-
       <div className="rounded-2xl border border-white/10 bg-[#0a0a0a] p-6 md:p-10">
 
-        {/* ================================================================ */}
-        {/* TEAM DETAILS                                                      */}
-        {/* ================================================================ */}
-
+        {/* TEAM DETAILS */}
         <section>
           <SectionHeader title="Team Details" />
 
@@ -216,7 +297,6 @@ export function BoardroomRegistrationForm({
               placeholder="Your state"
             />
 
-            {/* Team Size */}
             <div className="space-y-2 md:max-w-sm">
               <Label
                 htmlFor="teamSize"
@@ -262,130 +342,82 @@ export function BoardroomRegistrationForm({
           </div>
         </section>
 
-        {/* ================================================================== */}
-        {/* DIVIDER                                                            */}
-        {/* ================================================================== */}
-
         <div className="my-12 h-px bg-white/10" />
 
-        {/* ================================================================ */}
-        {/* POINT OF CONTACT DETAILS                                         */}
-        {/* ================================================================ */}
-
+        {/* TEAM MEMBERS */}
         <section>
-          <SectionHeader title="Point of Contact Details" />
+          <SectionHeader title="Team Member Details" />
 
-          <div className="space-y-10">
+          <p className="mb-8 text-sm leading-relaxed text-zinc-500">
+            Enter the details of every member of your
+            team. Member 1 will be treated as the
+            primary point of contact.
+          </p>
 
-            {/* ------------------------------------------------------------ */}
-            {/* Primary POC                                                   */}
-            {/* ------------------------------------------------------------ */}
+          <div className="space-y-8">
+            {teamSize >= 1 && (
+              <TeamMemberFields
+                memberNumber={1}
+                formData={formData}
+                onFieldChange={onFieldChange}
+                required
+              />
+            )}
 
-            <div>
-              <h3 className="mb-6 text-lg font-medium text-white">
-                Primary POC
-              </h3>
+            {teamSize >= 2 && (
+              <TeamMemberFields
+                memberNumber={2}
+                formData={formData}
+                onFieldChange={onFieldChange}
+                required
+              />
+            )}
 
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                <Field
-                  id="primaryPocName"
-                  label="Name"
-                  value={formData.primaryPocName}
-                  onChange={onFieldChange}
-                  placeholder="Full name"
-                />
+            {teamSize >= 3 && (
+              <TeamMemberFields
+                memberNumber={3}
+                formData={formData}
+                onFieldChange={onFieldChange}
+                required
+              />
+            )}
 
-                <Field
-                  id="primaryPocPhone"
-                  label="Phone Number"
-                  value={formData.primaryPocPhone}
-                  onChange={onFieldChange}
-                  placeholder="10-digit phone number"
-                  type="tel"
-                />
+            {teamSize >= 4 && (
+              <TeamMemberFields
+                memberNumber={4}
+                formData={formData}
+                onFieldChange={onFieldChange}
+                required
+              />
+            )}
 
-                <Field
-                  id="primaryPocEmail"
-                  label="Email Address"
-                  value={formData.primaryPocEmail}
-                  onChange={onFieldChange}
-                  placeholder="you@example.com"
-                  type="email"
-                />
-              </div>
-            </div>
-
-            {/* ------------------------------------------------------------ */}
-            {/* Secondary POC                                                 */}
-            {/* ------------------------------------------------------------ */}
-
-            <div className="border-t border-white/10 pt-10">
-              <h3 className="mb-6 text-lg font-medium text-white">
-                Secondary POC
-              </h3>
-
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                <Field
-                  id="secondaryPocName"
-                  label="Name"
-                  value={formData.secondaryPocName}
-                  onChange={onFieldChange}
-                  placeholder="Full name"
-                />
-
-                <Field
-                  id="secondaryPocPhone"
-                  label="Phone Number"
-                  value={formData.secondaryPocPhone}
-                  onChange={onFieldChange}
-                  placeholder="10-digit phone number"
-                  type="tel"
-                />
-
-                <Field
-                  id="secondaryPocEmail"
-                  label="Email Address"
-                  value={formData.secondaryPocEmail}
-                  onChange={onFieldChange}
-                  placeholder="you@example.com"
-                  type="email"
-                />
-              </div>
-            </div>
-
+            {teamSize >= 5 && (
+              <TeamMemberFields
+                memberNumber={5}
+                formData={formData}
+                onFieldChange={onFieldChange}
+                required
+              />
+            )}
           </div>
         </section>
 
-        {/* ================================================================== */}
-        {/* DIVIDER                                                            */}
-        {/* ================================================================== */}
-
         <div className="my-12 h-px bg-white/10" />
 
-        {/* ================================================================ */}
-        {/* ADDITIONAL DETAILS                                                */}
-        {/* ================================================================ */}
-
+        {/* ADDITIONAL DETAILS */}
         <section>
           <SectionHeader title="Additional Details" />
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-
-            {/* ------------------------------------------------------------ */}
-            {/* Accommodation                                                */}
-            {/* ------------------------------------------------------------ */}
-
-            <div className="space-y-4">
-              <Label className="text-base font-normal text-zinc-400">
+          <div className="flex justify-center">
+            <div className="w-full max-w-xl text-center">
+              <Label className="text-lg font-normal text-zinc-300">
                 Do you require accommodation?
               </Label>
 
-              <div className="flex flex-wrap gap-3">
-
-                {/* YES */}
+              <div className="mt-6 flex justify-center gap-4">
                 <label
                   className={cn(
-                    "flex cursor-pointer items-center gap-3 rounded-lg border px-5 py-3 transition-colors",
+                    "flex min-w-32 cursor-pointer items-center justify-center gap-3 rounded-full border px-6 py-3 transition-all",
                     formData.accommodationRequired ===
                       "yes"
                       ? "border-orange-500 bg-orange-500/10 text-white"
@@ -407,16 +439,17 @@ export function BoardroomRegistrationForm({
                       )
                     }
                     required
-                    className="accent-orange-500"
+                    className="h-4 w-4 accent-orange-500"
                   />
 
-                  <span>Yes</span>
+                  <span className="text-base">
+                    Yes
+                  </span>
                 </label>
 
-                {/* NO */}
                 <label
                   className={cn(
-                    "flex cursor-pointer items-center gap-3 rounded-lg border px-5 py-3 transition-colors",
+                    "flex min-w-32 cursor-pointer items-center justify-center gap-3 rounded-full border px-6 py-3 transition-all",
                     formData.accommodationRequired ===
                       "no"
                       ? "border-orange-500 bg-orange-500/10 text-white"
@@ -438,41 +471,35 @@ export function BoardroomRegistrationForm({
                       )
                     }
                     required
-                    className="accent-orange-500"
+                    className="h-4 w-4 accent-orange-500"
                   />
 
-                  <span>No</span>
+                  <span className="text-base">
+                    No
+                  </span>
                 </label>
-
               </div>
-            </div>
 
+              <p className="mx-auto mt-5 max-w-lg text-sm leading-relaxed text-zinc-500">
+                If you select Yes, the coordinators
+                will circulate a separate
+                accommodation form later.
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* ================================================================== */}
-        {/* DIVIDER                                                            */}
-        {/* ================================================================== */}
-
         <div className="my-12 h-px bg-white/10" />
 
-        {/* ================================================================ */}
-        {/* PAYMENT                                                           */}
-        {/* ================================================================ */}
-
+        {/* PAYMENT */}
         <section>
           <SectionHeader title="Payment" />
 
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
-
-            {/* ------------------------------------------------------------ */}
-            {/* QR CODE                                                       */}
-            {/* ------------------------------------------------------------ */}
-
             <div className="flex flex-col items-center">
               <p className="mb-5 text-center text-sm text-zinc-400">
-                Scan the QR code below to complete your
-                registration payment.
+                Scan the QR code below to complete
+                your registration payment.
               </p>
 
               <div className="rounded-xl border border-white/10 bg-white p-3">
@@ -484,41 +511,33 @@ export function BoardroomRegistrationForm({
               </div>
             </div>
 
-            {/* ------------------------------------------------------------ */}
-            {/* PAYMENT INFORMATION + UTR                                    */}
-            {/* ------------------------------------------------------------ */}
-
             <div className="flex flex-col justify-center">
-
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
                   Registration Fee
                 </p>
 
                 <div className="mt-3 flex flex-wrap items-center gap-3">
-                  {/* ORIGINAL PRICE */}
                   <span className="text-2xl font-medium text-zinc-500 line-through">
                     ₹1199
                   </span>
 
-                  {/* EARLY BIRD PRICE */}
                   <span className="font-serif text-5xl italic tracking-tight text-white">
                     ₹799
                   </span>
 
-                  {/* BADGE */}
                   <span className="rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">
                     Early Bird Offer
                   </span>
                 </div>
 
                 <p className="mt-4 text-sm leading-relaxed text-zinc-500">
-                  Pay ₹799 using the QR code and enter
-                  the UTR transaction number below.
+                  Pay ₹799 using the QR code and
+                  enter the UTR transaction number
+                  below.
                 </p>
               </div>
 
-              {/* UTR */}
               <div className="mt-8">
                 <Field
                   id="utrNumber"
@@ -529,19 +548,15 @@ export function BoardroomRegistrationForm({
                 />
 
                 <p className="mt-2 text-xs text-zinc-600">
-                  Enter the 12-digit UTR generated after
-                  completing the payment.
+                  Enter the 12-digit UTR generated
+                  after completing the payment.
                 </p>
               </div>
-
             </div>
           </div>
         </section>
 
-        {/* ================================================================== */}
-        {/* STATUS                                                              */}
-        {/* ================================================================== */}
-
+        {/* STATUS */}
         {submissionStatus === "success" && (
           <div className="mt-10 rounded-lg border border-green-500/20 bg-green-500/10 px-5 py-4 text-center text-sm text-green-400">
             Registration submitted successfully.
@@ -556,10 +571,7 @@ export function BoardroomRegistrationForm({
           </div>
         )}
 
-        {/* ================================================================== */}
-        {/* SUBMIT                                                              */}
-        {/* ================================================================== */}
-
+        {/* SUBMIT */}
         <div className="mt-10">
           <button
             type="submit"
@@ -576,7 +588,6 @@ export function BoardroomRegistrationForm({
               : "Submit registration"}
           </button>
         </div>
-
       </div>
     </form>
   );

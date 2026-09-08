@@ -1,6 +1,10 @@
 "use client";
 
-import { createContext, useContext } from "react";
+import {
+  createContext,
+  useContext,
+  type ReactNode,
+} from "react";
 
 import {
   useBoardroomRegistrationForm,
@@ -9,38 +13,43 @@ import {
 
 type BoardroomRegistrationContextValue = {
   formData: BoardroomRegistrationFormData;
-
   updateField: (
     field: keyof BoardroomRegistrationFormData,
     value: string
   ) => void;
-
   resetForm: () => void;
 };
 
 const BoardroomRegistrationContext =
-  createContext<BoardroomRegistrationContextValue | null>(null);
+  createContext<BoardroomRegistrationContextValue | null>(
+    null
+  );
 
 export function BoardroomRegistrationProvider({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
-  const registration = useBoardroomRegistrationForm();
+  const registration =
+    useBoardroomRegistrationForm();
 
   return (
-    <BoardroomRegistrationContext.Provider value={registration}>
+    <BoardroomRegistrationContext.Provider
+      value={registration}
+    >
       {children}
     </BoardroomRegistrationContext.Provider>
   );
 }
 
 export function useBoardroomRegistration() {
-  const context = useContext(BoardroomRegistrationContext);
+  const context = useContext(
+    BoardroomRegistrationContext
+  );
 
   if (!context) {
     throw new Error(
-      "useBoardroomRegistration must be used inside BoardroomRegistrationProvider"
+      "useBoardroomRegistration must be used within a BoardroomRegistrationProvider"
     );
   }
 
