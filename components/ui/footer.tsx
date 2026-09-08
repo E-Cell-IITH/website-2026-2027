@@ -8,7 +8,7 @@ const SOCIAL_LINKS = {
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[#080808] text-white">
+    <footer id="contact" className="relative scroll-mt-24 overflow-hidden bg-[#080808] text-white">
       <div className="h-px w-full bg-white/10" />
 
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20">
