@@ -1,5 +1,5 @@
 const GOOGLE_APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwThfaZpnyzc6KmnWAntIM8_flbLcxQO7blx7pWCk4qniAu5J0M_dYk1P6203it2gU/exec";
+  "https://script.google.com/macros/s/AKfycbxlYUdDM5lhQSpRPfFSaW_XlGZCgLfcPkEZt1rKnaRSr9ydh4rcB5RFOfYHzBVy9A0Z/exec";
 
 export async function submitBoardroomRegistration(
   formData: Record<string, string>

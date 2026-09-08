@@ -1,5 +1,5 @@
 const GOOGLE_APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbynsiAqOqGFgO9Wm98ckJAr56VDmO28FIe-bT9hlfYCkYTqdxTVXoGbwC9AmKAaBJg/exec";
+  "https://script.google.com/macros/s/AKfycbwhLsDx97Fl8k1AjIHweoQmlnARE3508UVPTXgaNEFbXl3dy7iuD8_VLbwN02uEJ-X5Sg/exec";
 
 export async function submitStartupSenateRegistration(
   formData: Record<string, string>

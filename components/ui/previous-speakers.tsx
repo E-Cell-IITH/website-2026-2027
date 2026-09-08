@@ -145,13 +145,13 @@ const Carousel_003 = ({
 export function PreviousSpeakers() {
   const speakers = [
     {
-      src: "/speakers/Upasana.jpg",
+      src: "/speakers/Upasana.webp",
       alt: "Upasana",
       name: "Upasana Kamineni",
       role: "VC of the Apollo Foundation, Founder and MD of URLife",
     },
     {
-      src: "/speakers/Anup Gupta.webp",
+      src: "/speakers/Anup-Gupta.webp",
       alt: "Anup Gupta",
       name: "Anup Gupta",
       role: "Founder and CEO of MathonGo",
@@ -163,25 +163,25 @@ export function PreviousSpeakers() {
       role: "Founder and Chief Mentor of Physics Galaxy",
     },
     {
-      src: "/speakers/Akhil Gupta, Founder, Nobroker.webp",
+      src: "/speakers/Akhil-Gupta.webp",
       alt: "Akhil Gupta",
       name: "Akhil Gupta",
       role: "Founder, No Broker",
     },
     {
-      src: "/speakers/Devvrat Arya - VP of Technology, Pepperfry.webp",
+      src: "/speakers/Devvrat-Arya.webp",
       alt: "Devvrat Arya",
       name: "Devvrat Arya",
       role: "VP of Technology, Pepperfry",
     },
     {
-      src: "/speakers/TN Hari - HR Head, BigBasket.webp",
+      src: "/speakers/TN-Hari.webp",
       alt: "TN Hari",
       name: "TN Hari",
       role: "HR Head, Big Basket",
     },
     {
-      src: "/speakers/Shashank Randev - Founder VC, 100X.VC.jpg",
+      src: "/speakers/Shashank-Randev.webp",
       alt: "Shashank Randev",
       name: "Shashank Randev",
       role: "Founder VC, 100X.VC",

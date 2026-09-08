@@ -100,7 +100,7 @@ export function BoardroomManifestoStats() {
           {/* Prize Pool */}
           <div className="flex flex-col items-center border-t border-white/10 px-6 py-4 text-center md:border-t-0">
             <span className="font-serif text-5xl italic tracking-tight text-white md:text-6xl">
-              ₹75L
+              ₹2L
             </span>
 
             <span className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
