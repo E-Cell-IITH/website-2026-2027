@@ -6,12 +6,12 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const images = [
-  "/startup-senate/img1.jpeg",
-  "/startup-senate/img2.jpeg",
-  "/startup-senate/img3.jpeg",
-  "/startup-senate/img4.jpeg",
-  "/startup-senate/img5.jpeg",
-  "/startup-senate/img6.jpeg",
+  "/startup-senate/img1.webp",
+  "/startup-senate/img2.webp",
+  "/startup-senate/img3.webp",
+  "/startup-senate/img4.webp",
+  "/startup-senate/img5.webp",
+  "/startup-senate/img6.webp",
 ];
 
 const Skiper30 = () => {

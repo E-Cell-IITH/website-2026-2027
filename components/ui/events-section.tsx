@@ -11,13 +11,13 @@ export function EventsSection() {
     {
       title: "Boardroom",
       date: "11th October 2026",
-      image: "/startup-senate/img6.jpeg",
+      image: "/startup-senate/img6.webp",
       link: "/events/boardroom",
     },
     {
       title: "Startup Senate",
       date: "10th–12th October 2026",
-      image: "/startup-senate/img9.jpeg",
+      image: "/startup-senate/img9.webp",
       link: "/events/startup-senate",
     },
     {
@@ -35,7 +35,7 @@ export function EventsSection() {
     {
       title: "E-Summit",
       date: "13th–15th March 2026",
-      image: "/Ashish_Arora.jpeg",
+      image: "/Ashish_Arora.webp",
       link: "#",
     },
     {
