@@ -275,6 +275,7 @@ export function BoardroomRegistrationForm({
    * Original price:
    * ₹1199 per head
    */
+
   const PRICE_PER_HEAD = 799;
   const ORIGINAL_PRICE_PER_HEAD = 1199;
 
@@ -538,7 +539,9 @@ export function BoardroomRegistrationForm({
           <SectionHeader title="Payment" />
 
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
+
             {/* QR CODE */}
+
             <div className="flex flex-col items-center">
               <p className="mb-5 text-center text-sm text-zinc-400">
                 Scan the QR code below to complete
@@ -555,6 +558,7 @@ export function BoardroomRegistrationForm({
             </div>
 
             {/* PAYMENT DETAILS */}
+
             <div className="flex flex-col justify-center">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
@@ -564,6 +568,7 @@ export function BoardroomRegistrationForm({
                 {teamSize > 0 ? (
                   <>
                     {/* TOTAL TEAM FEE */}
+
                     <div className="mt-3">
                       <span className="font-serif text-5xl italic tracking-tight text-white">
                         ₹{totalAmount.toLocaleString("en-IN")}
@@ -571,6 +576,7 @@ export function BoardroomRegistrationForm({
                     </div>
 
                     {/* PRICE BREAKDOWN */}
+
                     <div className="mt-4 flex flex-wrap items-center gap-3">
                       <span className="text-xl font-medium text-zinc-500 line-through">
                         ₹{ORIGINAL_PRICE_PER_HEAD}
@@ -590,6 +596,7 @@ export function BoardroomRegistrationForm({
                     </div>
 
                     {/* CALCULATION */}
+
                     <p className="mt-3 text-xs text-zinc-500">
                       ₹{PRICE_PER_HEAD} per head ×{" "}
                       {teamSize}{" "}
@@ -599,6 +606,7 @@ export function BoardroomRegistrationForm({
                     </p>
 
                     {/* PAYMENT INSTRUCTION */}
+
                     <p className="mt-4 text-sm leading-relaxed text-zinc-500">
                       Pay ₹
                       {totalAmount.toLocaleString(
@@ -612,21 +620,45 @@ export function BoardroomRegistrationForm({
                   </>
                 ) : (
                   <>
-                    <div className="mt-3">
-                      <span className="font-serif text-4xl italic tracking-tight text-zinc-500">
-                        Select team size
+                    {/* DEFAULT PER-HEAD PRICE */}
+
+                    <div className="mt-3 flex items-baseline gap-3">
+                      <span className="font-serif text-5xl italic tracking-tight text-white">
+                        ₹799
+                      </span>
+
+                      <span className="text-sm font-medium text-zinc-400">
+                        per head
                       </span>
                     </div>
 
-                    <p className="mt-3 text-sm leading-relaxed text-zinc-500">
-                      Select your team size above to
-                      see the total registration fee.
+                    {/* EARLY BIRD PRICE */}
+
+                    <div className="mt-4 flex flex-wrap items-center gap-3">
+                      <span className="text-xl font-medium text-zinc-500 line-through">
+                        ₹1199
+                      </span>
+
+                      <span className="text-xl font-medium text-zinc-300">
+                        ₹799
+                      </span>
+
+                      <span className="rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">
+                        Early Bird Offer
+                      </span>
+                    </div>
+
+                    <p className="mt-4 text-sm leading-relaxed text-zinc-500">
+                      ₹799 per head. Select your team
+                      size above to see the total
+                      registration fee.
                     </p>
                   </>
                 )}
               </div>
 
               {/* UTR */}
+
               <div className="mt-8">
                 <Field
                   id="utrNumber"
