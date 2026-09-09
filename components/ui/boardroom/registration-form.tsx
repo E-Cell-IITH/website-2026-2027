@@ -1,10 +1,6 @@
 "use client";
 
-import type {
-  ChangeEvent,
-  FormEvent,
-} from "react";
-
+import React, { ChangeEvent, FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
@@ -33,6 +29,10 @@ interface RegistrationFormProps {
   submissionError: string;
 }
 
+/* ============================================================
+   SECTION HEADER
+   ============================================================ */
+
 function SectionHeader({
   title,
 }: {
@@ -48,6 +48,10 @@ function SectionHeader({
     </div>
   );
 }
+
+/* ============================================================
+   FIELD
+   ============================================================ */
 
 interface FieldProps {
   id: keyof BoardroomRegistrationFormData;
@@ -163,6 +167,10 @@ function Field({
   );
 }
 
+/* ============================================================
+   TEAM MEMBER FIELDS
+   ============================================================ */
+
 interface TeamMemberFieldsProps {
   memberNumber: 1 | 2 | 3 | 4 | 5;
 
@@ -201,6 +209,7 @@ function TeamMemberFields({
     >
       <h3 className="mb-6 text-lg font-medium text-white">
         Member {memberNumber}
+
         {memberNumber === 1 && (
           <span className="ml-2 text-sm font-normal text-zinc-500">
             Primary Contact
@@ -242,6 +251,10 @@ function TeamMemberFields({
   );
 }
 
+/* ============================================================
+   MAIN REGISTRATION FORM
+   ============================================================ */
+
 export function BoardroomRegistrationForm({
   formData,
   onFieldChange,
@@ -253,6 +266,21 @@ export function BoardroomRegistrationForm({
   const teamSize =
     Number(formData.teamSize) || 0;
 
+  /*
+   * Boardroom registration pricing
+   *
+   * Early Bird:
+   * ₹799 per head
+   *
+   * Original price:
+   * ₹1199 per head
+   */
+  const PRICE_PER_HEAD = 799;
+  const ORIGINAL_PRICE_PER_HEAD = 1199;
+
+  const totalAmount =
+    teamSize * PRICE_PER_HEAD;
+
   return (
     <form
       onSubmit={onSubmit}
@@ -260,7 +288,10 @@ export function BoardroomRegistrationForm({
     >
       <div className="rounded-2xl border border-white/10 bg-[#0a0a0a] p-6 md:p-10">
 
-        {/* TEAM DETAILS */}
+        {/* =====================================================
+            TEAM DETAILS
+            ===================================================== */}
+
         <section>
           <SectionHeader title="Team Details" />
 
@@ -344,7 +375,10 @@ export function BoardroomRegistrationForm({
 
         <div className="my-12 h-px bg-white/10" />
 
-        {/* TEAM MEMBERS */}
+        {/* =====================================================
+            TEAM MEMBERS
+            ===================================================== */}
+
         <section>
           <SectionHeader title="Team Member Details" />
 
@@ -404,7 +438,10 @@ export function BoardroomRegistrationForm({
 
         <div className="my-12 h-px bg-white/10" />
 
-        {/* ADDITIONAL DETAILS */}
+        {/* =====================================================
+            ADDITIONAL DETAILS
+            ===================================================== */}
+
         <section>
           <SectionHeader title="Additional Details" />
 
@@ -415,6 +452,7 @@ export function BoardroomRegistrationForm({
               </Label>
 
               <div className="mt-6 flex justify-center gap-4">
+                {/* YES */}
                 <label
                   className={cn(
                     "flex min-w-32 cursor-pointer items-center justify-center gap-3 rounded-full border px-6 py-3 transition-all",
@@ -447,6 +485,7 @@ export function BoardroomRegistrationForm({
                   </span>
                 </label>
 
+                {/* NO */}
                 <label
                   className={cn(
                     "flex min-w-32 cursor-pointer items-center justify-center gap-3 rounded-full border px-6 py-3 transition-all",
@@ -491,11 +530,15 @@ export function BoardroomRegistrationForm({
 
         <div className="my-12 h-px bg-white/10" />
 
-        {/* PAYMENT */}
+        {/* =====================================================
+            PAYMENT
+            ===================================================== */}
+
         <section>
           <SectionHeader title="Payment" />
 
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
+            {/* QR CODE */}
             <div className="flex flex-col items-center">
               <p className="mb-5 text-center text-sm text-zinc-400">
                 Scan the QR code below to complete
@@ -511,33 +554,79 @@ export function BoardroomRegistrationForm({
               </div>
             </div>
 
+            {/* PAYMENT DETAILS */}
             <div className="flex flex-col justify-center">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
                   Registration Fee
                 </p>
 
-                <div className="mt-3 flex flex-wrap items-center gap-3">
-                  <span className="text-2xl font-medium text-zinc-500 line-through">
-                    ₹1199
-                  </span>
+                {teamSize > 0 ? (
+                  <>
+                    {/* TOTAL TEAM FEE */}
+                    <div className="mt-3">
+                      <span className="font-serif text-5xl italic tracking-tight text-white">
+                        ₹{totalAmount.toLocaleString("en-IN")}
+                      </span>
+                    </div>
 
-                  <span className="font-serif text-5xl italic tracking-tight text-white">
-                    ₹799
-                  </span>
+                    {/* PRICE BREAKDOWN */}
+                    <div className="mt-4 flex flex-wrap items-center gap-3">
+                      <span className="text-xl font-medium text-zinc-500 line-through">
+                        ₹{ORIGINAL_PRICE_PER_HEAD}
+                      </span>
 
-                  <span className="rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">
-                    Early Bird Offer
-                  </span>
-                </div>
+                      <span className="text-xl font-medium text-zinc-300">
+                        ₹{PRICE_PER_HEAD}
+                      </span>
 
-                <p className="mt-4 text-sm leading-relaxed text-zinc-500">
-                  Pay ₹799 using the QR code and
-                  enter the UTR transaction number
-                  below.
-                </p>
+                      <span className="text-sm font-medium text-zinc-400">
+                        per head
+                      </span>
+
+                      <span className="rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">
+                        Early Bird Offer
+                      </span>
+                    </div>
+
+                    {/* CALCULATION */}
+                    <p className="mt-3 text-xs text-zinc-500">
+                      ₹{PRICE_PER_HEAD} per head ×{" "}
+                      {teamSize}{" "}
+                      {teamSize === 1
+                        ? "member"
+                        : "members"}
+                    </p>
+
+                    {/* PAYMENT INSTRUCTION */}
+                    <p className="mt-4 text-sm leading-relaxed text-zinc-500">
+                      Pay ₹
+                      {totalAmount.toLocaleString(
+                        "en-IN"
+                      )}{" "}
+                      for your {teamSize}-member
+                      team using the QR code and
+                      enter the UTR transaction
+                      number below.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <div className="mt-3">
+                      <span className="font-serif text-4xl italic tracking-tight text-zinc-500">
+                        Select team size
+                      </span>
+                    </div>
+
+                    <p className="mt-3 text-sm leading-relaxed text-zinc-500">
+                      Select your team size above to
+                      see the total registration fee.
+                    </p>
+                  </>
+                )}
               </div>
 
+              {/* UTR */}
               <div className="mt-8">
                 <Field
                   id="utrNumber"
@@ -556,7 +645,10 @@ export function BoardroomRegistrationForm({
           </div>
         </section>
 
-        {/* STATUS */}
+        {/* =====================================================
+            STATUS
+            ===================================================== */}
+
         {submissionStatus === "success" && (
           <div className="mt-10 rounded-lg border border-green-500/20 bg-green-500/10 px-5 py-4 text-center text-sm text-green-400">
             Registration submitted successfully.
@@ -571,7 +663,10 @@ export function BoardroomRegistrationForm({
           </div>
         )}
 
-        {/* SUBMIT */}
+        {/* =====================================================
+            SUBMIT
+            ===================================================== */}
+
         <div className="mt-10">
           <button
             type="submit"
