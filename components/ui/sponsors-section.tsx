@@ -1,9 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 export function SponsorsSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
   const sponsors = [
+<<<<<<< HEAD
     { name: "Amazon", size: "text-3xl md:text-6xl", top: "20%", left: "80%" },
     { name: "UnStop", size: "text-xl md:text-4xl", top: "78%", left: "78%" },
     { name: "Uber", size: "text-xl md:text-4xl", top: "35%", left: "50%" },
@@ -14,39 +18,175 @@ export function SponsorsSection() {
     { name: "Stumagz", size: "text-xl md:text-4xl", top: "85%", left: "15%" },
     { name: "AglaSen", size: "text-xl md:text-4xl", top: "90%", left: "65%" },
     { name: "Bleep", size: "text-4xl md:text-7xl", top: "15%", left: "20%" },
+=======
+    {
+      name: "Bleep",
+      logo: "/sponsors/bleep.svg",
+      scale: 2,
+    },
+    {
+      name: "Amazon",
+      logo: "/sponsors/amazon.svg",
+      scale: 0.8,
+    },
+    {
+      name: "Uber",
+      logo: "/sponsors/uber.svg",
+      scale: 1,
+    },
+    {
+      name: "UnStop",
+      logo: "/sponsors/unstop.svg",
+      scale: 1,
+    },
+    {
+      name: "Henry Harvin",
+      logo: "/sponsors/henry-harvin.svg",
+      scale: 1,
+    },
+    {
+      name: "ExFinity",
+      logo: "/sponsors/exfinity.svg",
+      scale: 1,
+    },
+>>>>>>> 5b718afd6e36e8c47d43468b43f9c899c2370fe7
   ];
 
-  return (
-    <section className="relative w-full bg-transparent overflow-hidden py-24 md:py-32 border-t border-white/5">
-      <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
+  /*
+   * Track the section's position while scrolling.
+   *
+   * When the section first enters the viewport:
+   *   blur = 14px
+   *   opacity = 0.2
+   *
+   * As the user scrolls:
+   *   blur → 0px
+   *   opacity → 1
+   */
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 90%", "start 25%"],
+  });
 
-        {/* Header */}
-        <div className="text-center mb-16 md:mb-24">
-          <h2 className="text-sm md:text-base font-semibold tracking-[0.4em] text-zinc-500 uppercase">
+  const blur = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [14, 0]
+  );
+
+  const logoOpacity = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0.2, 1]
+  );
+
+  const headingOpacity = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0.35, 1]
+  );
+
+  const blurFilter = useTransform(
+    blur,
+    (value) => `blur(${value}px)`
+  );
+
+  return (
+    <section
+      ref={sectionRef}
+      className="
+        relative
+        w-full
+        overflow-hidden
+        border-t
+        border-white/5
+        bg-[#080808]
+        py-32
+        md:py-44
+      "
+    >
+      <div className="relative mx-auto max-w-6xl px-6">
+
+        {/* Heading */}
+        <motion.div
+          style={{ opacity: headingOpacity }}
+          className="text-center"
+        >
+          <h2
+            className="
+              text-4xl
+              font-semibold
+              uppercase
+              tracking-[-0.04em]
+              text-white/75
+              md:text-6xl
+              lg:text-7xl
+            "
+          >
             Backed By
           </h2>
-        </div>
+        </motion.div>
 
-        {/* Scattered Logos Canvas */}
-        <div className="relative w-full min-h-[600px] md:min-h-[700px]">
-          {sponsors.map((sponsor, idx) => (
+        {/* Sponsor Grid */}
+        <motion.div
+          style={{
+            filter: blurFilter,
+            opacity: logoOpacity,
+          }}
+          className="
+            mx-auto
+            mt-28
+            grid
+            max-w-9xl
+            grid-cols-2
+            items-center
+            justify-items-center
+            gap-x-10
+            gap-y-16
+            md:grid-cols-3
+            md:gap-x-16
+            md:gap-y-20
+          "
+        >
+          {sponsors.map((sponsor) => (
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.8, delay: idx * 0.1, ease: "easeOut" }}
-              className="absolute -translate-x-1/2 -translate-y-1/2 w-max"
-              style={{ top: sponsor.top, left: sponsor.left }}
+              key={sponsor.name}
+              whileHover={{
+                scale: 1.06,
+                opacity: 1,
+              }}
+              transition={{
+                duration: 0.25,
+                ease: "easeOut",
+              }}
+              className="
+                flex
+                h-32
+                w-full
+                max-w-[260px]
+                items-center
+                justify-center
+              "
             >
-              <div
-                className={`font-black tracking-tighter uppercase text-white opacity-30 hover:opacity-100 transition-opacity duration-300 cursor-default select-none ${sponsor.size}`}
-              >
-                {sponsor.name}
-              </div>
+              <img
+                src={sponsor.logo}
+                alt={`${sponsor.name} logo`}
+                style={{ transform: `scale(${sponsor.scale})` }}
+                className="
+                  h-full
+                  w-full
+                  object-contain
+                  brightness-0
+                  invert
+                  opacity-75
+                  transition-opacity
+                  duration-300
+                  hover:opacity-100
+                "
+              />
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

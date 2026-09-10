@@ -19,16 +19,21 @@ const LIIcon = () => (
 function OCCard({ person, label }: { person: Member; label: string }) {
   return (
     <div className="flex flex-col gap-6">
-      {/* Top row — photo + name */}
       <div className="flex flex-row gap-6 items-center">
         <div className="relative w-36 h-36 sm:w-44 sm:h-44 flex-shrink-0 rounded-sm overflow-hidden bg-white/[0.04]">
-          <MemberPhoto src={person.img} name={person.name} fill priority={true} />
+          <MemberPhoto
+            src={person.img}
+            name={person.name}
+            fill
+            priority={true}
+            sizes="(max-width: 640px) 144px, 176px"
+          />
         </div>
         <div className="min-w-0">
           <p className="text-[13px] tracking-[0.22em] uppercase text-white/30 mb-2">{label}</p>
           <h2
             className="text-white font-bold tracking-tight break-words"
-            style={{ fontSize: "clamp(1.8rem, 3vw, 3rem)", fontFamily: "'Playfair Display', serif" }}
+            style={{ fontSize: "clamp(1.8rem, 3vw, 3rem)", fontFamily: "var(--font-playfair), serif" }}
           >
             {person.name}
           </h2>
@@ -36,23 +41,14 @@ function OCCard({ person, label }: { person: Member; label: string }) {
         </div>
       </div>
 
-      {/* Buttons always in a row below */}
       <div className="flex flex-row gap-3">
         {person.email && (
-          <a
-            href={`mailto:${person.email}`}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 text-white/50 text-sm tracking-wide hover:text-white hover:border-white/25 transition-all whitespace-nowrap"
-          >
+          <a href={`mailto:${person.email}`} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 text-white/50 text-sm tracking-wide hover:text-white hover:border-white/25 transition-all whitespace-nowrap">
             <MailIcon /> Email
           </a>
         )}
         {person.linkedin && (
-          <a
-            href={person.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 text-white/50 text-sm tracking-wide hover:text-white hover:border-white/25 transition-all whitespace-nowrap"
-          >
+          <a href={person.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 text-white/50 text-sm tracking-wide hover:text-white hover:border-white/25 transition-all whitespace-nowrap">
             <LIIcon /> LinkedIn
           </a>
         )}

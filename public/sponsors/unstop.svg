@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="100%" height="100%">
+  <defs>
+    <mask id="un-mask">
+      <rect width="100%" height="100%" fill="white" />
+      <text x="250" y="195" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'" font-weight="800" font-size="150" text-anchor="middle" letter-spacing="-3" fill="black">un</text>
+    </mask>
+  </defs>
+  
+  <circle cx="250" cy="145" r="115" fill="#d6d6d6" mask="url(#un-mask)" />
+  <text x="375" y="195" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'" font-weight="800" font-size="150" letter-spacing="-5" fill="#d6d6d6">stop</text>
+</svg>
