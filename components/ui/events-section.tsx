@@ -15,6 +15,12 @@ export function EventsSection() {
       link: "/events/boardroom",
     },
     {
+    title: "Startup Studio",
+    date: "TBA",
+    image: "/startup-studio/studio-1.webp",
+    link: "#",
+  },
+    {
       title: "Startup Senate",
       date: "10th–12th October 2026",
       image: "/startup-senate/img9.webp",
