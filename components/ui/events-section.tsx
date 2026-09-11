@@ -10,13 +10,13 @@ export function EventsSection() {
   const pastEvents = [
     {
       title: "Boardroom",
-      date: "11th October 2026",
+      date: "1st November 2026",
       image: "/startup-senate/img6.webp",
       link: "/events/boardroom",
     },
     {
       title: "Startup Senate",
-      date: "10th–12th October 2026",
+      date: "31st October 2026",
       image: "/startup-senate/img9.webp",
       link: "/events/startup-senate",
     },

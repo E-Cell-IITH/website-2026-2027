@@ -21,7 +21,7 @@ export default function BoardroomHero() {
           </h1>
 
           <p className="-mt-4 font-serif text-lg font-bold italic tracking-wide text-white/80 sm:text-xl">
-            11th October 2026
+            1st November 2026
           </p>
 
           <div className="pointer-events-auto flex flex-col items-center gap-4 sm:flex-row">

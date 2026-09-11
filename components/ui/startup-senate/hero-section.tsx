@@ -22,7 +22,7 @@ export default function StartupSenateHero() {
 
           {/* Event Date */}
           <p className="-mt-4 font-serif text-xl font-bold italic tracking-wide text-white/80 sm:text-xl">
-            10–12th October
+            31st October 2026
           </p>
 
           <div className="pointer-events-auto flex flex-col items-center gap-4 sm:flex-row">
