@@ -16,7 +16,7 @@ export default function HeroSection() {
         
         {/* Bold Title */}
         <h1 className="text-xl sm:text-6xl md:text-4xl font-serif italic font-light tracking-tight text-zinc-500 mb-8">
-          Hyderabad
+          Bengaluru
         </h1>
 
         {/* Primary Action Button */}
@@ -47,7 +47,7 @@ export default function HeroSection() {
             </div>
             <div className="text-left">
               <h4 className="text-xs font-bold tracking-widest text-gray-500 uppercase">Date</h4>
-              <p className="text-lg font-medium text-gray-200 mt-1 whitespace-nowrap">18th July 2025</p>
+              <p className="text-lg font-medium text-gray-200 mt-1 whitespace-nowrap">5th July 2025</p>
             </div>
           </div>
 
@@ -67,7 +67,7 @@ export default function HeroSection() {
             </div>
             <div className="text-left">
               <h4 className="text-xs font-bold tracking-widest text-gray-500 uppercase">Venue</h4>
-              <p className="text-lg font-medium text-gray-200 mt-1 whitespace-nowrap">will be announced soon</p>
+              <p className="text-lg font-medium text-gray-200 mt-1 whitespace-nowrap"> Secret Spot Café</p>
             </div>
           </div>
 
@@ -101,14 +101,14 @@ export default function HeroSection() {
             <Image src="/founderHive/dateEmoji.png" alt="Date" width={32} height={32} />
             <div className="text-left">
               <h4 className="text-xs font-bold text-gray-500 uppercase">Date</h4>
-              <p className="text-base text-gray-200 font-medium">18th July 2026</p>
+              <p className="text-base text-gray-200 font-medium">5th July 2026</p>
             </div>
           </div>
           <div className="flex items-center gap-4 border-t border-gray-900 pt-4">
             <Image src="/founderHive/venue.png" alt="Venue" width={32} height={32} />
             <div className="text-left">
               <h4 className="text-xs font-bold text-gray-500 uppercase">Venue</h4>
-              <p className="text-base text-gray-200 font-medium">will be announced soon...</p>
+              <p className="text-base text-gray-200 font-medium">Secret Spot Café</p>
             </div>
           </div>
           <div className="flex items-center gap-4 border-t border-gray-900 pt-4">
