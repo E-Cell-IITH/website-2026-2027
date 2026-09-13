@@ -15,16 +15,16 @@ export function EventsSection() {
       link: "/events/boardroom",
     },
     {
-      title: "Startup Studio",
-      date: "90-Day Cohort Program",
-      image: "/startup-studio/studio-1.webp",
-      link: "/events/startup-studio",
-    },
-    {
       title: "Startup Senate",
       date: "10th–12th October 2026",
       image: "/startup-senate/img9.webp",
       link: "/events/startup-senate",
+    },
+    {
+      title: "Startup Studio",
+      date: "90-Day Cohort Program",
+      image: "/startup-studio/studio-1.webp",
+      link: "/events/startup-studio",
     },
     {
       title: "Founders' Hive",

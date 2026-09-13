@@ -21,6 +21,8 @@ const images = [
   "/startup-studio/gallery-1.webp",
   "/startup-studio/gallery-2.webp",
   "/startup-studio/gallery-3.webp",
+  "/startup-studio/gallery-4.webp",
+  "/startup-studio/gallery-5.webp",
 ];
 
 const StartupStudioGallery = () => {
@@ -104,25 +106,25 @@ const DesktopGallery = () => {
         className="relative box-border flex h-[175vh] gap-[4vw] overflow-hidden bg-[#0a0a0a] p-[4vw] sm:gap-[3vw] sm:p-[3vw] md:gap-[2vw] md:p-[2vw]"
       >
         <Column
-          images={[images[0], images[6], images[1], images[7], images[2], images[8]]}
+          images={[images[0], images[6], images[1], images[10], images[2], images[7]]}
           y={y}
           offset="desktop-first"
           className="flex w-1/2 md:w-1/3 lg:w-1/4"
         />
         <Column
-          images={[images[3], images[9], images[4], images[6], images[5], images[7]]}
+          images={[images[3], images[11], images[4], images[6], images[5], images[8]]}
           y={y2}
           offset="desktop-second"
           className="flex w-1/2 md:w-1/3 lg:w-1/4"
         />
         <Column
-          images={[images[8], images[0], images[9], images[1], images[6], images[2]]}
+          images={[images[9], images[0], images[10], images[1], images[7], images[2]]}
           y={y3}
           offset="desktop-third"
           className="hidden md:flex md:w-1/3 lg:w-1/4"
         />
         <Column
-          images={[images[3], images[7], images[4], images[8], images[5], images[9]]}
+          images={[images[3], images[8], images[4], images[11], images[5], images[9]]}
           y={y4}
           offset="desktop-fourth"
           className="hidden lg:flex lg:w-1/4"
@@ -165,8 +167,8 @@ const MobileGallery = () => {
         ref={gallery}
         className="relative box-border flex h-[150vh] w-full gap-[3vw] overflow-hidden bg-[#0a0a0a] px-[3vw] py-[2vw]"
       >
-        <MobileColumn images={[images[0], images[6], images[1], images[7]]} y={y} position="left" />
-        <MobileColumn images={[images[8], images[2], images[9], images[3]]} y={y2} position="right" />
+        <MobileColumn images={[images[0], images[6], images[1], images[10]]} y={y} position="left" />
+        <MobileColumn images={[images[8], images[2], images[11], images[3]]} y={y2} position="right" />
       </div>
       <div className="h-16" />
     </GalleryHeading>
