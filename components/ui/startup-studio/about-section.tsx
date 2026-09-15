@@ -79,12 +79,13 @@ export function StartupStudioAbout() {
           </div>
         </div>
 
-        <div className="mt-16 border-t border-white/10 pt-10">
+                {/* Outcome */}
+        <div className="mt-16 border-t border-white/10 pt-10 text-center">
           <h3 className="mb-5 font-sans text-xl font-semibold uppercase tracking-wide text-white md:text-2xl">
             Outcome
           </h3>
 
-          <p className="text-sm leading-relaxed text-zinc-300 md:text-base">
+          <p className="mx-auto max-w-3xl text-sm leading-relaxed text-zinc-300 md:text-base">
             Startup Studio provided participating startups with structured
             mentorship, entrepreneurial guidance, investor exposure, and
             practical startup-building support, enabling ventures to

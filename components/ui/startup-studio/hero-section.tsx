@@ -1,6 +1,4 @@
 import { GLSLHills } from "@/components/ui/glsl-hills";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 export default function StartupStudioHero() {
   return (
@@ -23,12 +21,6 @@ export default function StartupStudioHero() {
           <p className="-mt-4 font-serif text-lg font-bold italic tracking-wide text-white/80 sm:text-xl">
             90-Day Cohort Program
           </p>
-
-          <div className="pointer-events-auto flex flex-col items-center gap-4 sm:flex-row">
-            <a href="#about" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "h-14 rounded-full border-white/20 bg-transparent px-9 text-base text-white hover:bg-black/10 hover:text-white")}>
-              About the event
-            </a>
-          </div>
         </div>
       </section>
     </main>
