@@ -30,13 +30,13 @@ export function EventsSection() {
       title: "Emerge",
       date: "11th–12th October 2025",
       image: "/Emerge 2.0.webp",
-      link: "#",
+      link: "/events/emerge",
     },
     {
       title: "E-Summit",
       date: "13th–15th March 2026",
       image: "/Ashish_Arora.webp",
-      link: "#",
+      link: "/events/esummit",
     },
     {
       title: "Fetching Fortunes",
