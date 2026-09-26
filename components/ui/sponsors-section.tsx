@@ -39,44 +39,15 @@ export function SponsorsSection() {
     },
   ];
 
-  /*
-   * Track the section's position while scrolling.
-   *
-   * When the section first enters the viewport:
-   *   blur = 14px
-   *   opacity = 0.2
-   *
-   * As the user scrolls:
-   *   blur → 0px
-   *   opacity → 1
-   */
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start 90%", "start 25%"],
   });
 
-  const blur = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [14, 0]
-  );
-
-  const logoOpacity = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0.2, 1]
-  );
-
-  const headingOpacity = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0.35, 1]
-  );
-
-  const blurFilter = useTransform(
-    blur,
-    (value) => `blur(${value}px)`
-  );
+  const blur = useTransform(scrollYProgress, [0, 1], [14, 0]);
+  const logoOpacity = useTransform(scrollYProgress, [0, 1], [0.2, 1]);
+  const headingOpacity = useTransform(scrollYProgress, [0, 1], [0.35, 1]);
+  const blurFilter = useTransform(blur, (value) => `blur(${value}px)`);
 
   return (
     <section
@@ -93,8 +64,6 @@ export function SponsorsSection() {
       "
     >
       <div className="relative mx-auto max-w-6xl px-6">
-
-        {/* Heading */}
         <motion.div
           style={{ opacity: headingOpacity }}
           className="text-center"
@@ -114,7 +83,6 @@ export function SponsorsSection() {
           </h2>
         </motion.div>
 
-        {/* Sponsor Grid */}
         <motion.div
           style={{
             filter: blurFilter,
@@ -174,7 +142,6 @@ export function SponsorsSection() {
             </motion.div>
           ))}
         </motion.div>
-
       </div>
     </section>
   );

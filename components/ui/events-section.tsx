@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -21,7 +21,13 @@ export function EventsSection() {
       link: "/events/startup-senate",
     },
     {
-      title: "Founders’ Hive",
+      title: "Startup Studio",
+      date: "90-Day Cohort Program",
+      image: "/startup-studio/studio-1.webp",
+      link: "/events/startup-studio",
+    },
+    {
+      title: "Founders' Hive",
       date: "5th July 2025",
       image: "/founders_hive.webp",
       link: "#",
@@ -170,7 +176,7 @@ export function EventsSection() {
                   </h3>
 
                   {/* View Event Info */}
-                  <a
+                    <a
                     href={event.link}
                     className="pointer-events-auto mt-5 inline-flex w-fit items-center rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-medium text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white hover:text-black"
                   >
@@ -185,3 +191,4 @@ export function EventsSection() {
     </section>
   );
 }
+
