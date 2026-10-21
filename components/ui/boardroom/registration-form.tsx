@@ -269,15 +269,10 @@ export function BoardroomRegistrationForm({
   /*
    * Boardroom registration pricing
    *
-   * Early Bird:
-   * ₹799 per head
-   *
-   * Original price:
-   * ₹1199 per head
+   * ₹999 per head
    */
 
-  const PRICE_PER_HEAD = 799;
-  const ORIGINAL_PRICE_PER_HEAD = 1199;
+  const PRICE_PER_HEAD = 999;
 
   const totalAmount =
     teamSize * PRICE_PER_HEAD;
@@ -578,20 +573,12 @@ export function BoardroomRegistrationForm({
                     {/* PRICE BREAKDOWN */}
 
                     <div className="mt-4 flex flex-wrap items-center gap-3">
-                      <span className="text-xl font-medium text-zinc-500 line-through">
-                        ₹{ORIGINAL_PRICE_PER_HEAD}
-                      </span>
-
                       <span className="text-xl font-medium text-zinc-300">
                         ₹{PRICE_PER_HEAD}
                       </span>
 
                       <span className="text-sm font-medium text-zinc-400">
                         per head
-                      </span>
-
-                      <span className="rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">
-                        Early Bird Offer
                       </span>
                     </div>
 
@@ -624,7 +611,7 @@ export function BoardroomRegistrationForm({
 
                     <div className="mt-3 flex items-baseline gap-3">
                       <span className="font-serif text-5xl italic tracking-tight text-white">
-                        ₹799
+                        ₹{PRICE_PER_HEAD}
                       </span>
 
                       <span className="text-sm font-medium text-zinc-400">
@@ -632,24 +619,8 @@ export function BoardroomRegistrationForm({
                       </span>
                     </div>
 
-                    {/* EARLY BIRD PRICE */}
-
-                    <div className="mt-4 flex flex-wrap items-center gap-3">
-                      <span className="text-xl font-medium text-zinc-500 line-through">
-                        ₹1199
-                      </span>
-
-                      <span className="text-xl font-medium text-zinc-300">
-                        ₹799
-                      </span>
-
-                      <span className="rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-black">
-                        Early Bird Offer
-                      </span>
-                    </div>
-
                     <p className="mt-4 text-sm leading-relaxed text-zinc-500">
-                      ₹799 per head. Select your team
+                      ₹{PRICE_PER_HEAD} per head. Select your team
                       size above to see the total
                       registration fee.
                     </p>
