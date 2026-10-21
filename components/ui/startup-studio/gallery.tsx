@@ -100,28 +100,28 @@ const DesktopGallery = () => {
         className="relative box-border flex h-[175vh] gap-[4vw] overflow-hidden bg-[#0a0a0a] p-[4vw] sm:gap-[3vw] sm:p-[3vw] md:gap-[2vw] md:p-[2vw]"
       >
         <Column
-          images={[images[0], images[3], images[1], images[4]]}
+          images={[images[0], images[3], images[1], images[4], images[2], images[5]]}
           y={y}
           offset="desktop-first"
           className="flex w-1/2 md:w-1/3 lg:w-1/4"
         />
 
         <Column
-          images={[images[2], images[5], images[0], images[3]]}
+          images={[images[2], images[5], images[0], images[3], images[1], images[4]]}
           y={y2}
           offset="desktop-second"
           className="flex w-1/2 md:w-1/3 lg:w-1/4"
         />
 
         <Column
-          images={[images[4], images[1], images[5], images[2]]}
+          images={[images[4], images[1], images[5], images[2], images[0], images[3]]}
           y={y3}
           offset="desktop-third"
           className="hidden md:flex md:w-1/3 lg:w-1/4"
         />
 
         <Column
-          images={[images[1], images[4], images[2], images[5]]}
+          images={[images[1], images[4], images[2], images[5], images[3], images[0]]}
           y={y4}
           offset="desktop-fourth"
           className="hidden lg:flex lg:w-1/4"
@@ -165,8 +165,16 @@ const MobileGallery = () => {
         ref={gallery}
         className="relative box-border flex h-[150vh] w-full gap-[3vw] overflow-hidden bg-[#0a0a0a] px-[3vw] py-[2vw]"
       >
-        <MobileColumn images={[images[0], images[3], images[1]]} y={y} position="left" />
-        <MobileColumn images={[images[4], images[2], images[5]]} y={y2} position="right" />
+        <MobileColumn
+          images={[images[0], images[3], images[1], images[4], images[2], images[5], images[0], images[3], images[1]]}
+          y={y}
+          position="left"
+        />
+        <MobileColumn
+          images={[images[4], images[2], images[5], images[1], images[3], images[0], images[4], images[2], images[5]]}
+          y={y2}
+          position="right"
+        />
       </div>
       <div className="h-16" />
     </GalleryHeading>
@@ -183,8 +191,8 @@ const MobileColumn = ({ images, y, position }: MobileColumnProps) => {
   return (
     <motion.div
       className={cn(
-        "flex h-max w-1/2 flex-col gap-[3vw] will-change-transform",
-        position === "left" ? "translate-y-[8%]" : "translate-y-[-8%]"
+        "relative flex h-max w-1/2 flex-col gap-[3vw] will-change-transform",
+        position === "left" ? "top-[-20%]" : "top-[-28%]"
       )}
       style={{ y }}
     >
