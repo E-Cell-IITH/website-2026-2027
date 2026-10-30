@@ -11,12 +11,13 @@ import Lenis from "lenis";
 import { cn } from "@/lib/utils";
 
 const images = [
-  "/startup-senate/img1.jpeg",
-  "/startup-senate/img2.jpeg",
-  "/startup-senate/img3.jpeg",
-  "/startup-senate/img4.jpeg",
-  "/startup-senate/img5.jpeg",
-  "/startup-senate/img6.jpeg",
+ "/boardroom/img1.jpg",
+  "/boardroom/img2.jpg",
+  "/boardroom/img3.jpg",
+  "/boardroom/img4.jpg",
+  "/boardroom/img5.jpg",
+  "/boardroom/img6.jpg",
+  "/boardroom/img7.jpg",
 ];
 
 const Skiper30 = () => {
@@ -334,7 +335,7 @@ const MobileColumn = ({
       {images.map((src, i) => (
         <div
           key={`${src}-${i}`}
-          className="relative aspect-[4/3] w-full overflow-hidden"
+          className="relative aspect-4/3 w-full overflow-hidden"
         >
           <img
             src={src}
@@ -389,7 +390,7 @@ const Column = ({
       {images.map((src, i) => (
         <div
           key={`${src}-${i}`}
-          className="relative aspect-[4/3] w-full overflow-hidden"
+          className="relative aspect-4/3 w-full overflow-hidden"
         >
           <img
             src={src}
